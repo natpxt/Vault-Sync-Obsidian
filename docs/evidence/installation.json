@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "results": [
+    "install-per-user",
+    "installed-sha256",
+    "startup",
+    "update",
+    "uninstall-preserves-data"
+  ]
+}

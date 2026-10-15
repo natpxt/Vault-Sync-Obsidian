@@ -1,0 +1,221 @@
+{
+  "passed": 43,
+  "failed": 0,
+  "results": [
+    {
+      "name": "initial local file uploads",
+      "status": "passed",
+      "ms": 423
+    },
+    {
+      "name": "initial cloud file downloads",
+      "status": "passed",
+      "ms": 97
+    },
+    {
+      "name": "initial divergent files conflict without overwrite",
+      "status": "passed",
+      "ms": 165
+    },
+    {
+      "name": "identical bytes ignore different timestamps",
+      "status": "passed",
+      "ms": 73
+    },
+    {
+      "name": "local edit propagates",
+      "status": "passed",
+      "ms": 158
+    },
+    {
+      "name": "remote edit propagates",
+      "status": "passed",
+      "ms": 164
+    },
+    {
+      "name": "concurrent edits conflict",
+      "status": "passed",
+      "ms": 159
+    },
+    {
+      "name": "concurrent equal edits converge",
+      "status": "passed",
+      "ms": 116
+    },
+    {
+      "name": "local deletion propagates",
+      "status": "passed",
+      "ms": 138
+    },
+    {
+      "name": "remote deletion propagates",
+      "status": "passed",
+      "ms": 145
+    },
+    {
+      "name": "edit versus delete conflicts",
+      "status": "passed",
+      "ms": 147
+    },
+    {
+      "name": "both deleted acknowledge tombstone",
+      "status": "passed",
+      "ms": 103
+    },
+    {
+      "name": "rename converges as verified copy and delete",
+      "status": "passed",
+      "ms": 179
+    },
+    {
+      "name": "nested file preserves relative path",
+      "status": "passed",
+      "ms": 107
+    },
+    {
+      "name": "missing root never deletes",
+      "status": "passed",
+      "ms": 181
+    },
+    {
+      "name": "missing local root never deletes cloud",
+      "status": "passed",
+      "ms": 138
+    },
+    {
+      "name": "blocked file does not become deletion",
+      "status": "passed",
+      "ms": 130
+    },
+    {
+      "name": "stale preview does not overwrite newer edit",
+      "status": "passed",
+      "ms": 165
+    },
+    {
+      "name": "race before apply is detected",
+      "status": "passed",
+      "ms": 117
+    },
+    {
+      "name": "pending survives restart and retries",
+      "status": "passed",
+      "ms": 177
+    },
+    {
+      "name": "conflicts survive restart",
+      "status": "passed",
+      "ms": 153
+    },
+    {
+      "name": "unrelated files continue during conflict",
+      "status": "passed",
+      "ms": 211
+    },
+    {
+      "name": "resolve local verifies both copies",
+      "status": "passed",
+      "ms": 262
+    },
+    {
+      "name": "resolve remote verifies both copies",
+      "status": "passed",
+      "ms": 336
+    },
+    {
+      "name": "manual Markdown merge",
+      "status": "passed",
+      "ms": 289
+    },
+    {
+      "name": "changed conflict rejects stale resolution",
+      "status": "passed",
+      "ms": 226
+    },
+    {
+      "name": "resolve delete versus edit by choosing deletion",
+      "status": "passed",
+      "ms": 209
+    },
+    {
+      "name": "binary merge is rejected",
+      "status": "passed",
+      "ms": 138
+    },
+    {
+      "name": "same roots rejected",
+      "status": "passed",
+      "ms": 54
+    },
+    {
+      "name": "nested roots rejected",
+      "status": "passed",
+      "ms": 43
+    },
+    {
+      "name": "state inside vault rejected",
+      "status": "passed",
+      "ms": 47
+    },
+    {
+      "name": "path traversal rejected",
+      "status": "passed",
+      "ms": 48
+    },
+    {
+      "name": "internal files and FreeFileSync database ignored",
+      "status": "passed",
+      "ms": 61
+    },
+    {
+      "name": "migration backup verified and manifest present",
+      "status": "passed",
+      "ms": 116
+    },
+    {
+      "name": "missed watcher event repaired by full scan",
+      "status": "passed",
+      "ms": 149
+    },
+    {
+      "name": "same-size edit with restored mtime still detected",
+      "status": "passed",
+      "ms": 144
+    },
+    {
+      "name": "cloud placeholder flags recognized",
+      "status": "passed",
+      "ms": 0
+    },
+    {
+      "name": "idempotent sync produces no loops",
+      "status": "passed",
+      "ms": 112
+    },
+    {
+      "name": "offline two-PC edits to different notes converge",
+      "status": "passed",
+      "ms": 379
+    },
+    {
+      "name": "offline two-PC same-note edits preserve conflict",
+      "status": "passed",
+      "ms": 281
+    },
+    {
+      "name": "interrupted replace preserves rollback bytes after restart",
+      "status": "passed",
+      "ms": 160
+    },
+    {
+      "name": "junction is blocked without traversing external target",
+      "status": "passed",
+      "ms": 629
+    },
+    {
+      "name": "worker observes edits and pause-resume",
+      "status": "passed",
+      "ms": 7237
+    }
+  ]
+}

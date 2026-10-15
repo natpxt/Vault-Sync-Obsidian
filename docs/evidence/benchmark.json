@@ -1,0 +1,13 @@
+{
+  "files": 500,
+  "bytesPerFile": 2055,
+  "previewMs": 1369.1811,
+  "initialMs": 23272.7856,
+  "reconciliationMs": 1811.1329,
+  "idleSampleSeconds": 6,
+  "idleCpuPercentMachine": 0.0433652314376452,
+  "workingSetMiB": 53.71484375,
+  "eventLatencyMs": 1407.3482,
+  "delivered": true,
+  "environment": ".NET console worker, NTFS temporary folders; excludes iCloud and WPF"
+}
