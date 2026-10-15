@@ -1,0 +1,40 @@
+**/bin/
+**/obj/
+artifacts/
+*.user
+dist/*.exe
+dist/*.pdb
+dist/SHA256SUMS.txt
+.local/
+
+# Estado do aplicativo, fixtures e dados pessoais nunca são código de publicação.
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.jsonl
+**/config.json
+/logs/
+/conflicts/
+/operations/
+/migration-backup/
+/integration-backups/
+/docs/evidence/
+/Vault Sync - Obsidian.md
+/docs/IA *
+/docs/entrega.md
+/docs/correcoes-mvp-*.md
+
+# Credenciais e certificados locais.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.snk
+.vs/
+.idea/
+*.suo
+*.log
