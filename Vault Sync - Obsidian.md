@@ -1,7 +1,8 @@
 # Vault Sync - Obsidian
 
-**Estado:** implementação e pacote do piloto 0.1.0; ativação do vault real pendente de revisão no assistente.  
-**Data:** 2026-10-14.  
+**Estado:** implementação e pacote do piloto 0.1.0; ativação do vault real pendente de revisão no assistente.
+
+**Data:** 2026-10-14.
 **Origem:** solicitação do usuário para implementar aplicativo instalável; nome e endereço do projeto confirmados durante a execução.
 
 ## Finalidade e decisões

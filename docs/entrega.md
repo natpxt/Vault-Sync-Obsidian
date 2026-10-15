@@ -13,7 +13,7 @@ O produto passou a se chamar **Vault Sync - Obsidian** por decisão do usuário 
 - Smoke test de três telas, renderizado e inspecionado: instalação, configuração e comparação de conflitos.
 - Executável autocontido validado: instalação por usuário, hash instalado, startup, atualização e remoção dos componentes instalados preservando os dados.
 - Verificação de pacote registra memória do processo que renderiza as três telas; não representa o consumo em repouso com um vault real.
-- Empacotamento sem compressão de assemblies escolhido após comparação: aproximadamente 162 MiB no smoke test de três telas, contra 282 MiB na variante comprimida. O instalador ocupa aproximadamente 156 MiB. A meta inicial de 50–150 MB não deve ser anunciada como medição da interface completa.
+- Empacotamento sem compressão de assemblies escolhido após comparação: aproximadamente 162–165 MiB no smoke test de três telas, contra 282 MiB na variante comprimida. O instalador ocupa aproximadamente 156 MiB. A meta inicial de 50–150 MB não deve ser anunciada como medição da interface completa.
 - Aplicativo efetivamente instalado, com janela de configuração aberta e sincronização ainda inativa: **141,2 MiB de conjunto de trabalho**, **78,7 MiB de memória privada** e **0,00% de CPU total** em uma amostra de seis segundos. É um cenário diferente do benchmark do núcleo e não inclui o processo do iCloud.
 - Relatórios sanitizados em `evidence/`. Fixtures e saídas intermediárias permanecem fora do vault.
 
