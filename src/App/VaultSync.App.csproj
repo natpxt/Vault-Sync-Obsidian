@@ -2,12 +2,14 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType><TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF><UseWindowsForms>true</UseWindowsForms>
-    <AssemblyName>VaultSync</AssemblyName><Version>1.0.0</Version>
+    <AssemblyName>VaultSync</AssemblyName><Version>1.1.0</Version>
     <Product>Vault Sync - Obsidian</Product><Description>Sincronização local com iCloud e comparação de conflitos</Description>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Resources/VaultSync.ico</ApplicationIcon>
     <StartupObject>VaultSync.App.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup><ProjectReference Include="../Core/VaultSync.Core.csproj" /></ItemGroup>
   <ItemGroup><Using Remove="System.Windows.Forms" /><Using Remove="System.Drawing" /></ItemGroup>
   <ItemGroup><EmbeddedResource Include="Resources/*.txt" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="Resources/Translations.json" LogicalName="VaultSync.App.Resources.Translations.json" /></ItemGroup>
 </Project>

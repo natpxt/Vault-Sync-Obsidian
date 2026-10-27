@@ -12,9 +12,15 @@ internal static class UiSmoke
     {
         output ??= Path.Combine(Path.GetTempPath(), "vaultsync-ui-smoke"); Directory.CreateDirectory(output);
         var app = new System.Windows.Application { ShutdownMode = ShutdownMode.OnExplicitShutdown };
+        Theme.Initialize(Path.Combine(output, "ui-preferences")); Theme.Set(ThemeMode.Dark, false);
         SynchronizationContext.SetSynchronizationContext(new System.Windows.Threading.DispatcherSynchronizationContext(System.Windows.Threading.Dispatcher.CurrentDispatcher));
         var setup = new SetupWindow(); Capture(setup, Path.Combine(output, "installer.png")); setup.Close();
-        var main = new MainWindow(testMode: true); Capture(main, Path.Combine(output, "main.png")); main.CloseSmoke();
+        var main = new MainWindow(testMode: true); Capture(main, Path.Combine(output, "main.png"));
+        foreach (var command in Descendants(main).OfType<System.Windows.Controls.Button>().Where(b => Equals(b.Tag, "WindowCommand")))
+        {
+            if (command.FocusVisualStyle == null || command.Template.Triggers.OfType<Trigger>().Any(t => t.Property == UIElement.IsKeyboardFocusedProperty)) throw new InvalidOperationException("Contorno persistente por foco do mouse nos controles da janela.");
+        }
+        main.CloseSmoke();
         string fixtures = Path.Combine(output, "fixtures"); Directory.CreateDirectory(Path.Combine(fixtures, "local")); Directory.CreateDirectory(Path.Combine(fixtures, "cloud"));
         string l = Path.Combine(fixtures, "local", "Exemplo.md"), c = Path.Combine(fixtures, "cloud", "Exemplo.md");
         File.WriteAllText(l, "# Projeto\n\nPrazo: sexta-feira\n\n- Revisar orçamento\n"); File.WriteAllText(c, "# Projeto\n\nPrazo: segunda-feira\n\n- Revisar orçamento\n- Consultar equipe\n");
@@ -27,11 +33,106 @@ internal static class UiSmoke
         if (compactDialog.Top < 0 || compactDialog.Height + compactDialog.Top > 560 || compactDialog.Width + compactDialog.Left > 800) throw new InvalidOperationException("Comparador fora da área útil.");
         Capture(compactDialog, Path.Combine(output, "conflict-compact.png")); compactDialog.Close();
         var confirmation = new ThemedDialog("Aplicar esta escolha às duas pastas? O conteúdo será revalidado antes da alteração.", true); Capture(confirmation, Path.Combine(output, "confirmation.png")); confirmation.Close();
+        ThemeAndScreens(output, comparisonEngine.PrepareComparison(conflict)!);
+        LocalizationAndLayout(output, comparisonEngine.PrepareComparison(conflict)!);
+        RunWithDispatcher(Activation(output));
         RunWithDispatcher(Workflow(output));
         if (ConflictWindow.MarkdownPreview("# Teste\n<script>alert(1)</script>\n![imagem](https://invalid.example/a)").Blocks.Count != 3) throw new InvalidOperationException("Preview inesperado.");
         using var process = System.Diagnostics.Process.GetCurrentProcess(); process.Refresh();
-        File.WriteAllText(Path.Combine(output, "result.json"), System.Text.Json.JsonSerializer.Serialize(new { status = "passed", screens = 11, workflow = "start, preview-conflicts, refresh-and-open-comparison, two-way-copy, newest-both-directions, pause, resume, stop, restart, persistent-log, folder-hit-testing, compact-work-area, themed-confirmation, themed-options, policy-upgrade-stays-stopped", networkRenderer = false, workingSetMiB = process.WorkingSet64 / 1048576.0 }));
-        app.Shutdown();
+        File.WriteAllText(Path.Combine(output, "result.json"), System.Text.Json.JsonSerializer.Serialize(new { status = "passed", screens = Directory.GetFiles(output, "*.png", SearchOption.AllDirectories).Length, workflow = "start, retained-navigation, preview-conflicts, refresh-and-open-comparison, choose-local-with-confirmation, two-way-copy, newest-both-directions, pause, resume, stop, restart, persistent-log, folder-hit-testing, compact-work-area, themed-confirmation, themed-options, policy-upgrade-stays-stopped", themes = "system/light/dark, persistence, live shared brushes, simulated system change", languages = "pt-BR/en/es; five pages in both themes; persistence; switching while monitoring; separate backup/settings; contextual actions; empty validation at three scales; keyboard-only focus style", dpi = "96/144/192 render DPI and corresponding logical work areas; physical monitor switching requires manual verification", networkRenderer = false, workingSetMiB = process.WorkingSet64 / 1048576.0 }));
+        Theme.Shutdown(); app.Shutdown();
+    }
+    private static async Task Activation(string output)
+    {
+        using var instance = new SingleInstance("Local\\VaultSync-Test-" + Guid.NewGuid().ToString("N"));
+        if (!instance.IsOwner) throw new InvalidOperationException("Instância de teste não adquiriu o mutex isolado.");
+        var window = new MainWindow(true, Path.Combine(output, "activation-state"), true); window.Show();
+        instance.Listen(() => window.Dispatcher.BeginInvoke(window.Reveal));
+        try
+        {
+            window.Hide(); await Send(); await Until(() => window.IsVisible);
+            window.WindowState = WindowState.Minimized; await Send(); await Until(() => window.WindowState == WindowState.Normal);
+            Capture(window, Path.Combine(output, "reopened-instance.png"));
+        }
+        finally { window.CloseSmoke(); }
+        async Task Send()
+        {
+            var start = new System.Diagnostics.ProcessStartInfo(Environment.ProcessPath!) { UseShellExecute = false, CreateNoWindow = true };
+            if (Path.GetFileNameWithoutExtension(Environment.ProcessPath!).Equals("dotnet", StringComparison.OrdinalIgnoreCase)) start.ArgumentList.Add(Path.Combine(AppContext.BaseDirectory, "VaultSync.dll"));
+            start.ArgumentList.Add("--self-test-activate"); start.ArgumentList.Add(instanceName());
+            using var sender = System.Diagnostics.Process.Start(start) ?? throw new IOException("Não foi possível iniciar o teste de segunda abertura.");
+            using var limit = new CancellationTokenSource(TimeSpan.FromSeconds(10)); await sender.WaitForExitAsync(limit.Token);
+            if (sender.ExitCode != 0) throw new InvalidOperationException("Segunda abertura não encontrou a instância existente.");
+        }
+        string instanceName() => instance.Name;
+    }
+    private static void ThemeAndScreens(string output, ComparisonSnapshot snapshot)
+    {
+        var savedSystem = Theme.SystemDark;
+        Theme.SystemDark = () => true; Theme.Set(ThemeMode.System); if (!Theme.IsDark) throw new InvalidOperationException("Tema do sistema não aplicado.");
+        Theme.SystemDark = () => false; Theme.RefreshSystem(); if (Theme.IsDark) throw new InvalidOperationException("Mudança do tema do sistema não aplicada.");
+        var shared = Theme.Get("Ink"); Theme.Set(ThemeMode.Dark); var previous = shared.Color;
+        Theme.Set(ThemeMode.Light); if (!ReferenceEquals(shared, Theme.Get("Ink")) || previous == shared.Color) throw new InvalidOperationException("Janelas abertas não compartilham as cores.");
+        Theme.Initialize(Path.Combine(output, "ui-preferences")); if (Theme.Mode != ThemeMode.Light) throw new InvalidOperationException("Tema não persistido.");
+        File.WriteAllText(Path.Combine(output, "ui-preferences", "ui-settings.json"), "{invalid"); Theme.Initialize(Path.Combine(output, "ui-preferences")); if (Theme.Mode != ThemeMode.System) throw new InvalidOperationException("Preferência inválida bloqueou o padrão.");
+        Theme.SystemDark = savedSystem;
+        foreach (var mode in new[] { ThemeMode.Dark, ThemeMode.Light })
+        {
+            Theme.Set(mode, false); string dir = Path.Combine(output, mode.ToString().ToLowerInvariant()); Directory.CreateDirectory(dir);
+            var main = new MainWindow(true, Path.Combine(dir, "state")); main.Show();
+            for (int i = 0; i < 5; i++) { main.SelectTabSmoke(i); Capture(main, Path.Combine(dir, $"page-{i}.png")); main.AssertKeyboardSmoke(); }
+            main.SelectTabSmoke(0);
+            main.SetThemeSmoke(mode == ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark); if (Theme.IsDark == (mode == ThemeMode.Dark)) throw new InvalidOperationException("Seletor de tema não aplicou a troca."); main.SetThemeSmoke(mode);
+            foreach (double scale in new[] { 1.0, 1.5, 2.0 })
+            {
+                main.Width = 1100; main.Height = 780; Ui.FitWindow(main, new Rect(0, 0, 1366 / scale, 900 / scale));
+                main.UpdateLayout(); foreach (var scroll in Descendants(main).OfType<System.Windows.Controls.ScrollViewer>()) scroll.ScrollToTop(); main.UpdateLayout();
+                Capture(main, Path.Combine(dir, $"layout-{scale * 100:0}.png"), scale); main.AssertFolderLayoutSmoke();
+            }
+            main.CloseSmoke();
+            var setup = new SetupWindow(); Capture(setup, Path.Combine(dir, "installer.png")); setup.Close();
+            var comparison = new ConflictWindow(snapshot, "PC de exemplo"); Capture(comparison, Path.Combine(dir, "comparison.png")); AssertScrollbars(comparison); comparison.Close();
+            var integration = new IntegrationWindow(new(@"C:\demo\local", @"C:\demo\cloud"), true); Capture(integration, Path.Combine(dir, "integration.png")); integration.Close();
+            var confirmation = new ThemedDialog("Confirme a escolha após comparar as versões.", true); Capture(confirmation, Path.Combine(dir, "confirmation.png")); confirmation.Close();
+        }
+        Theme.Set(ThemeMode.Dark, false);
+        var evaluation = new MainWindow(true, Path.Combine(output, "evaluation-state"), true);
+        if (!evaluation.EmptyPathsSmoke || evaluation.IsMonitoringSmoke) throw new InvalidOperationException("Avaliação importou pastas ou iniciou o monitor."); evaluation.CloseSmoke();
+    }
+    private static void LocalizationAndLayout(string output, ComparisonSnapshot snapshot)
+    {
+        string dir = Path.Combine(output, "languages"); Directory.CreateDirectory(dir);
+        var main = new MainWindow(true, Path.Combine(output, "language-state")); main.Show();
+        foreach (string language in Strings.Codes)
+        {
+            main.SetLanguageSmoke(language);
+            if (language == "en" && Strings.T("Pasta criada: Conflitos") != "Folder created: Conflitos") throw new InvalidOperationException("Tradução modificou o nome de uma pasta.");
+            if (Strings.Code != language) throw new InvalidOperationException("Idioma não aplicado pelo seletor.");
+            if (main.PageTitleSmoke(4) != Strings.T("⚙ Configurações") || main.PageTitleSmoke(3) != Strings.T("Backups")) throw new InvalidOperationException("Navegação não traduzida.");
+            foreach (var theme in new[] { ThemeMode.Dark, ThemeMode.Light })
+            {
+                Theme.Set(theme);
+                for (int page = 0; page < 5; page++)
+                {
+                    main.SelectTabSmoke(page);
+                    if (main.MonitorActionsVisibleSmoke != (page == 0)) throw new InvalidOperationException("Comandos globais aparecem fora de Pastas.");
+                    Capture(main, Path.Combine(dir, $"{language}-{theme}-page-{page}.png"));
+                    var credit = Descendants(main).OfType<System.Windows.Controls.TextBlock>().Single(t => t.Text == Strings.T("Desenvolvido por Natan Peixoto Maciel"));
+                    if (!credit.IsVisible || credit.TranslatePoint(new Point(), main).Y >= main.ActualHeight) throw new InvalidOperationException("Crédito não está permanentemente visível.");
+                    if (page == 4 && Descendants(main).OfType<System.Windows.Controls.Border>().Where(b => Equals(b.Tag, "SettingsGroup")).Any(b => b.Padding.Bottom < 20 || b.Margin.Bottom < 20)) throw new InvalidOperationException("Espaçamento das configurações insuficiente.");
+                }
+            }
+            var comparison = new ConflictWindow(snapshot, "PC de exemplo"); Capture(comparison, Path.Combine(dir, $"{language}-comparison.png")); comparison.Close();
+            var setup = new SetupWindow(); Capture(setup, Path.Combine(dir, $"{language}-installer.png")); setup.Close();
+            Theme.Initialize(Path.Combine(output, "ui-preferences")); if (Strings.Code != language) throw new InvalidOperationException("Idioma não foi preservado com o tema.");
+        }
+        main.SetLanguageSmoke("pt-BR"); main.SelectTabSmoke(0); RunWithDispatcher(main.EmptyPreviewSmokeAsync());
+        foreach (double scale in new[] { 1.0, 1.5, 2.0 })
+        {
+            main.Width = 1100; main.Height = 780; Ui.FitWindow(main, new Rect(0, 0, 1366 / scale, 900 / scale));
+            main.AssertEmptyLayoutSmoke(); Capture(main, Path.Combine(dir, $"empty-validation-{scale * 100:0}.png"), scale);
+        }
+        main.CloseSmoke(); Theme.Set(ThemeMode.Dark, false);
     }
     private static async Task Workflow(string output)
     {
@@ -45,9 +146,23 @@ internal static class UiSmoke
         {
             using (var held = new FileStream(Path.Combine(cloud, ".obsidian", "workspace.json"), FileMode.Open, FileAccess.ReadWrite, FileShare.None))
             {
-                await window.StartSmokeAsync(new(local, cloud));
+                window.SelectTabSmoke(0); await window.StartSmokeAsync(new(local, cloud));
+                if (window.SelectedPageSmoke != 0) throw new InvalidOperationException("Iniciar deslocou a navegação.");
                 await Until(() => File.Exists(Path.Combine(local, "inicial.md")));
                 var status = await window.StatusSmokeAsync(); if (!status.Running || status.Conflicts.Count != 1) throw new InvalidOperationException("Monitor ou lista de conflitos não refletiu o início real.");
+                foreach (string language in Strings.Codes) { window.SetLanguageSmoke(language); if (!window.IsMonitoringSmoke || window.SelectedPageSmoke != 0) throw new InvalidOperationException("Idioma interrompeu o monitor ou mudou a página."); }
+                window.SetLanguageSmoke("pt-BR");
+                int index = 0;
+                foreach (var example in new[] {
+                    new WorkerStatus("Aguardando alterações nas duas pastas.", [], [], WatchingRoots: 2, LastCheck: DateTimeOffset.Now),
+                    new WorkerStatus("Monitor pausado.", [], [], Paused: true, WatchingRoots: 2),
+                    new WorkerStatus("Conferência em andamento.", [], [], WatchingRoots: 2, State: "Conferindo"),
+                    new WorkerStatus("Arquivo ocupado; nova tentativa pendente.", [], ["exemplo.md"], WatchingRoots: 2),
+                    status,
+                    new WorkerStatus("Pasta indisponível. A leitura não confirma exclusão.", [], [], WatchingRoots: 1, State: "Erro") })
+                { foreach (var theme in new[] { ThemeMode.Dark, ThemeMode.Light }) { Theme.Set(theme, false); window.StatusPresentationSmoke(example); Capture(window, Path.Combine(output, $"state-{index}-{theme}.png")); } index++; }
+                Theme.Set(ThemeMode.Dark, false);
+                window.StatusPresentationSmoke(status);
                 window.DemoPathsSmoke(); window.SelectTabSmoke(0); Capture(window, Path.Combine(output, "monitoring.png"));
                 window.SelectTabSmoke(1); Capture(window, Path.Combine(output, "conflicts-list.png"));
                 window.PauseSmoke(true); _ = await window.StatusSmokeAsync();
@@ -71,6 +186,15 @@ internal static class UiSmoke
                 window.PauseSmoke(false); await Until(() => File.Exists(Path.Combine(local, "pausado.md"))); _ = await window.StatusSmokeAsync();
                 window.SelectTabSmoke(2); Capture(window, Path.Combine(output, "execution-log.png"));
             }
+            File.WriteAllText(Path.Combine(local, "escolha.md"), "manter versão local"); File.WriteAllText(Path.Combine(cloud, "escolha.md"), "outra versão"); File.SetLastWriteTimeUtc(Path.Combine(local, "escolha.md"), tied); File.SetLastWriteTimeUtc(Path.Combine(cloud, "escolha.md"), tied);
+            var resolutionWait = System.Diagnostics.Stopwatch.StartNew();
+            while (!(await window.StatusSmokeAsync()).Conflicts.Any(c => c.Path == "escolha.md"))
+            { if (resolutionWait.Elapsed > TimeSpan.FromSeconds(15)) throw new TimeoutException("Conflito da fixture não apareceu."); await Task.Delay(100); }
+            window.SelectTabSmoke(1); window.StatusPresentationSmoke(await window.StatusSmokeAsync());
+            ThemedDialog.ConfirmationSmoke = d => d.Dispatcher.BeginInvoke(() => d.DialogResult = true);
+            window.ComparisonOpenedSmoke = w => w.Dispatcher.BeginInvoke(() => ((ConflictWindow)w).ChooseSmoke("local"));
+            try { await window.OpenComparisonSmokeAsync(); } finally { ThemedDialog.ConfirmationSmoke = null; window.ComparisonOpenedSmoke = null; }
+            await Until(() => File.ReadAllText(Path.Combine(cloud, "escolha.md")) == "manter versão local");
             await window.StopSmokeAsync(); if (window.IsMonitoringSmoke || window.StateText != "PARADO") throw new InvalidOperationException("Botão Parar não parou o monitor.");
             await window.StartSmokeAsync(new(local, cloud)); await Task.Delay(1300); await window.StopSmokeAsync();
             if (AppFiles.LoadConfig(state)?.MonitorOnLaunch != false) throw new InvalidOperationException("Parada não persistida.");
@@ -98,12 +222,12 @@ internal static class UiSmoke
         task.ContinueWith(_ => System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(() => frame.Continue = false), TaskScheduler.FromCurrentSynchronizationContext());
         System.Windows.Threading.Dispatcher.PushFrame(frame); task.GetAwaiter().GetResult();
     }
-    private static void Capture(Window window, string path)
+    private static void Capture(Window window, string path, double scale = 1)
     {
         if (!window.IsVisible) window.Show();
         window.Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.ApplicationIdle);
         window.Measure(new Size(window.Width, window.Height)); window.Arrange(new Rect(0, 0, window.Width, window.Height)); window.UpdateLayout();
-        var image = new RenderTargetBitmap((int)window.Width, (int)window.Height, 96, 96, PixelFormats.Pbgra32); image.Render(window);
+        var image = new RenderTargetBitmap((int)(window.Width * scale), (int)(window.Height * scale), 96 * scale, 96 * scale, PixelFormats.Pbgra32); image.Render(window);
         var encoder = new PngBitmapEncoder(); encoder.Frames.Add(BitmapFrame.Create(image)); using var stream = File.Create(path); encoder.Save(stream);
     }
     private static void AssertScrollbars(DependencyObject root)

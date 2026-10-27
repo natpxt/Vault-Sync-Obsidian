@@ -20,6 +20,8 @@ dist/SHA256SUMS.txt
 /migration-backup/
 /integration-backups/
 /docs/evidence/
+# Explorações locais de marca e evidências de avaliação; o guia e imagens finais ficam em docs/.
+/docs/identidade-visual/
 /Vault Sync - Obsidian.md
 /docs/IA *
 /docs/entrega.md

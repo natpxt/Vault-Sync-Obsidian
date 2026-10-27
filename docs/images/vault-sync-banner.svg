@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="300" viewBox="0 0 1120 300" role="img" aria-labelledby="title desc">
+  <title id="title">Vault Sync · Local primeiro. Sincronização visível.</title>
+  <desc id="desc">Símbolo Órbita: pedra facetada com duas setas. Aplicativo independente para Windows e vaults do Obsidian.</desc>
+  <rect width="1120" height="300" rx="20" fill="#1c1c1c"/>
+  <rect x="1" y="1" width="1118" height="298" rx="19" fill="none" stroke="#3f3f3f"/>
+  <g transform="translate(58 54) scale(3)" color="#b49aff">
+    <path d="M9 28A24 24 0 0 1 45 12M55 36A24 24 0 0 1 19 52" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+    <path d="M49 18L47 7L38 14ZM15 46L17 57L26 50Z" fill="currentColor"/>
+    <polygon points="33,20 26,24 22,31 29,34" fill="currentColor"/><polygon points="33,20 41,28 37,43 29,34" fill="currentColor" opacity=".72"/><polygon points="22,31 26,40 37,43 29,34" fill="currentColor" opacity=".45"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="300" y="82" fill="#b49aff" font-size="14" letter-spacing="3">WINDOWS · OBSIDIAN · ICLOUD</text>
+    <text x="296" y="151" fill="#dadada" font-size="62" font-weight="600" letter-spacing="-2">Vault Sync</text>
+    <text x="300" y="198" fill="#dadada" font-size="24">Local primeiro. Sincronização visível.</text>
+    <text x="300" y="241" fill="#b3b3b3" font-size="16">Seu vault local, conectado à pasta do iCloud deste PC.</text>
+  </g>
+</svg>

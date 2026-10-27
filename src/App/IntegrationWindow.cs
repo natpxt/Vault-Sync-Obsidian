@@ -17,13 +17,17 @@ internal sealed class IntegrationWindow : Window
     private readonly TextBox text = new() { IsReadOnly = true, AcceptsReturn = true, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, TextWrapping = TextWrapping.Wrap };
     private readonly string? junction;
     private readonly string? oldJunctionTarget;
-    public IntegrationWindow(SyncConfig config)
+    private string reportSource = "";
+    public IntegrationWindow(SyncConfig config, bool testMode = false)
     {
         this.config = config;
         Title = "Revisar integração · " + Program.Product; Width = 900; Height = 650; Ui.Style(this);
         var root = new DockPanel { Margin = new Thickness(10) }; Ui.Chrome(this, root, "Revisar integração · Vault Sync");
+        void LocalizeReport() => text.Text = Strings.T(reportSource);
+        Strings.Changed += LocalizeReport; Closed += (_, _) => Strings.Changed -= LocalizeReport;
         var header = Ui.Text("Referências externas · revisão antes de aplicar", 23, Ui.Accent); DockPanel.SetDock(header, Dock.Top); root.Children.Add(header);
         var controls = Ui.Row(Ui.Button("Aplicar alterações revisadas", (_, _) => Apply()), Ui.Button("Fechar", (_, _) => Close())); DockPanel.SetDock(controls, Dock.Bottom); root.Children.Add(controls); root.Children.Add(text);
+        if (testMode) { ((Button)controls.Children[0]).IsEnabled = false; SetReport("Prévia isolada de referências externas.\n\nOrigem: C:\\Users\\demo\\iCloudDrive\\Meu vault\nNova referência: C:\\Users\\demo\\Documents\\Meu vault\n\nNenhum arquivo externo foi lido ou alterado nesta demonstração."); return; }
         string user = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         foreach (var path in new[] { Path.Combine(user, ".codex", "hooks.json"), Path.Combine(user, ".codex", "config.toml"), Path.Combine(user, ".codex", "AGENTS.md"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "obsidian", "obsidian.json") })
         {
@@ -50,8 +54,9 @@ internal sealed class IntegrationWindow : Window
         if (junction != null) lines.Add("JUNÇÃO · " + junction + "\n→ " + Path.Combine(config.LocalRoot, ".agents", "skills", "memory-sync"));
         lines.Add("\nOs vínculos relativos dentro do vault serão preservados. Referências em documentos históricos não serão reescritas. Aplicativos com caminhos abertos devem ser reabertos na pasta local.");
         if (edits.Count == 0 && junction == null) lines.Add("Nenhuma referência externa correspondente foi encontrada.");
-        text.Text = string.Join("\n", lines);
+        SetReport(string.Join("\n", lines));
     }
+    private void SetReport(string source) { reportSource = source; text.Text = Strings.T(source); }
     internal static string ReplacePaths(string text, string oldPath, string newPath)
     {
         var oldNorm = Paths.Normalize(oldPath); var newNorm = Paths.Normalize(newPath);
@@ -91,7 +96,7 @@ internal sealed class IntegrationWindow : Window
                 catch { if (!Directory.Exists(junction)) CreateJunction(junction, oldJunctionTarget!); throw; }
                 if (new DirectoryInfo(junction).LinkTarget is not { } actual || !Paths.Normalize(actual).Equals(Paths.Normalize(target), StringComparison.OrdinalIgnoreCase)) throw new IOException("Junção não verificada.");
             }
-            text.AppendText("\n\nAtualizações verificadas. Backup: " + backup + "\nReinicie os aplicativos e revise hooks no Codex.");
+            SetReport(reportSource + "\n\nAtualizações verificadas. Backup: " + backup + "\nReinicie os aplicativos e revise hooks no Codex.");
             edits.Clear();
         }
         catch (Exception ex) { ThemedDialog.Info(this, "Integração interrompida. Confira o relatório e os backups antes de repetir.\n" + ex.Message + "\nBackup: " + backup); }

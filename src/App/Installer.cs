@@ -11,14 +11,18 @@ namespace VaultSync.App;
 
 internal static class Installer
 {
-    public static string InstallRoot => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Programs", "VaultSync");
+    private sealed record TestPaths(string Root, string RegistryRoot, string Mutex);
+    private static TestPaths? testPaths;
+    public static string InstallRoot => testPaths == null ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Programs", "VaultSync") : Path.Combine(testPaths.Root, "app");
     public static string InstalledExe => Path.Combine(InstallRoot, "VaultSync.exe");
-    private const string UninstallKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\VaultSync";
+    private static string UninstallKey => testPaths == null ? @"Software\Microsoft\Windows\CurrentVersion\Uninstall\VaultSync" : testPaths.RegistryRoot + @"\Uninstall";
+    private static string StartupKey => testPaths == null ? @"Software\Microsoft\Windows\CurrentVersion\Run" : testPaths.RegistryRoot + @"\Run";
+    private static string MutexName => testPaths?.Mutex ?? "Local\\VaultSync-" + Environment.UserName;
     public static bool IsInstalledExecutable => Paths.Normalize(Environment.ProcessPath!).Equals(Paths.Normalize(InstalledExe), StringComparison.OrdinalIgnoreCase);
-    private static string Shortcut => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), Program.Product + ".lnk");
+    private static string Shortcut => testPaths == null ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), Program.Product + ".lnk") : Path.Combine(testPaths.Root, "VaultSync-test.lnk");
     public static void Install(bool startup, bool launch)
     {
-        using var running = new Mutex(false, "Local\\VaultSync-" + Environment.UserName);
+        using var running = new Mutex(false, MutexName);
         if (!running.WaitOne(0)) throw new IOException("Feche o Vault Sync pelo ícone da bandeja antes de atualizar.");
         try
         {
@@ -33,7 +37,7 @@ internal static class Installer
             CreateShortcut();
             var notices = new System.Text.StringBuilder("Vault Sync - Obsidian · avisos de terceiros\n.NET / WPF / Windows Forms / Microsoft.Data.Sqlite: Microsoft e contribuidores, MIT. SQLite: domínio público. SQLitePCLRaw: Apache-2.0.\n\n");
             var assembly = typeof(Installer).Assembly;
-            foreach (string resource in assembly.GetManifestResourceNames().Where(x => x.Contains(".Resources.", StringComparison.Ordinal)))
+            foreach (string resource in assembly.GetManifestResourceNames().Where(x => x.Contains(".Resources.", StringComparison.Ordinal) && x.EndsWith(".txt", StringComparison.Ordinal)))
             {
                 using var stream = assembly.GetManifestResourceStream(resource)!; using var reader = new StreamReader(stream);
                 notices.AppendLine(resource); notices.AppendLine(reader.ReadToEnd());
@@ -42,7 +46,7 @@ internal static class Installer
             using (var key = Registry.CurrentUser.CreateSubKey(UninstallKey))
             {
                 key.SetValue("DisplayName", Program.Product); key.SetValue("DisplayVersion", Program.Version);
-                key.SetValue("Publisher", "Projeto pessoal Vault Sync"); key.SetValue("InstallLocation", InstallRoot);
+                key.SetValue("Publisher", "Natan Peixoto Maciel"); key.SetValue("InstallLocation", InstallRoot);
                 key.SetValue("UninstallString", "\"" + InstalledExe + "\" --uninstall");
                 key.SetValue("DisplayIcon", InstalledExe); key.SetValue("NoModify", 1); key.SetValue("NoRepair", 1);
                 key.SetValue("EstimatedSize", (int)(new FileInfo(InstalledExe).Length / 1024));
@@ -54,7 +58,7 @@ internal static class Installer
     }
     public static void SetStartup(bool enabled)
     {
-        using var run = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run");
+        using var run = Registry.CurrentUser.CreateSubKey(StartupKey);
         if (enabled) run.SetValue("VaultSync", "\"" + InstalledExe + "\" --app --background");
         else run.DeleteValue("VaultSync", false);
     }
@@ -74,9 +78,14 @@ internal static class Installer
     }
     internal static void TestLifecycle(string report)
     {
-        if (Directory.Exists(InstallRoot) || Registry.CurrentUser.OpenSubKey(UninstallKey) != null)
-            throw new IOException("Teste de instalação requer ausência de instalação anterior; nenhuma instalação existente será alterada.");
+        string id = Guid.NewGuid().ToString("N");
+        var sandbox = new TestPaths(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "VaultSyncBuild", "installer-tests", id), @"Software\VaultSync\InstallerTests\" + id, "Local\\VaultSync-Test-" + id);
+        if (testPaths != null) throw new InvalidOperationException("Verificação de instalação já em andamento.");
+        testPaths = sandbox;
         var results = new List<string>();
+        try
+        {
+        Directory.CreateDirectory(sandbox.Root);
         Install(false, false);
         if (!File.Exists(InstalledExe) || !File.Exists(Shortcut)) throw new IOException("Instalação incompleta.");
         using (var key = Registry.CurrentUser.OpenSubKey(UninstallKey))
@@ -85,18 +94,27 @@ internal static class Installer
         if (Scanner.Read(Environment.ProcessPath!)!.Hash != Scanner.Read(InstalledExe)!.Hash) throw new IOException("Hash instalado divergente.");
         results.Add("installed-sha256");
         SetStartup(true);
-        using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run"))
+        using (var key = Registry.CurrentUser.OpenSubKey(StartupKey))
             if ((key?.GetValue("VaultSync") as string)?.Contains("--background", StringComparison.Ordinal) != true) throw new IOException("Inicialização automática ausente.");
         results.Add("startup");
         Install(false, false); results.Add("update");
-        Directory.CreateDirectory(AppFiles.DataRoot);
-        string sentinel = Path.Combine(AppFiles.DataRoot, ".installation-check-" + Guid.NewGuid().ToString("N")); File.WriteAllText(sentinel, "preserve user data");
+        string data = Path.Combine(sandbox.Root, "data"); Directory.CreateDirectory(data);
+        string sentinel = Path.Combine(data, "preserve.txt"); File.WriteAllText(sentinel, "preserve user data");
         SetStartup(false); Registry.CurrentUser.DeleteSubKeyTree(UninstallKey, false); File.Delete(Shortcut);
-        Paths.CheckAncestors(InstalledExe); File.Delete(InstalledExe); File.Delete(Path.Combine(InstallRoot, "ThirdPartyNotices.txt")); Directory.Delete(InstallRoot, false);
-        if (!File.Exists(sentinel)) throw new IOException("Dados locais não preservados."); File.Delete(sentinel);
+        Cleanup(["--remove-install", "-1", InstallRoot]);
+        if (!File.Exists(sentinel) || File.Exists(InstalledExe)) throw new IOException("Desinstalação não preservou dados ou não removeu o executável.");
         results.Add("uninstall-preserves-data");
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(report))!);
-        File.WriteAllText(report, System.Text.Json.JsonSerializer.Serialize(new { status = "passed", results }, new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
+        File.WriteAllText(report, System.Text.Json.JsonSerializer.Serialize(new { status = "passed", isolated = true, root = sandbox.Root, results }, new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
+        }
+        finally
+        {
+            // The context is created internally with a GUID; never accept test roots from command-line input.
+            Registry.CurrentUser.DeleteSubKeyTree(sandbox.RegistryRoot, false);
+            if (File.Exists(Shortcut)) File.Delete(Shortcut);
+            Cleanup(["--remove-install", "-1", InstallRoot]);
+            testPaths = null;
+        }
     }
     public static void Uninstall()
     {
@@ -139,16 +157,18 @@ internal sealed class SetupWindow : Window
     {
         Title = "Instalar · " + Program.Product; Width = 670; Height = 480; ResizeMode = ResizeMode.NoResize; Ui.Style(this);
         var panel = new StackPanel { Margin = new Thickness(14) }; Ui.Chrome(this, new ScrollViewer { Content = panel, VerticalScrollBarVisibility = ScrollBarVisibility.Auto }, "Instalar · Vault Sync");
-        panel.Children.Add(Ui.Text("VAULT SYNC", 32, Ui.Accent));
-        panel.Children.Add(Ui.Text("Obsidian · Local primeiro. Sincronização visível.", 18));
+        var brand = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 2, 0, 18) }; brand.Children.Add(Brand.Logo(72));
+        var signature = new StackPanel(); signature.Children.Add(Ui.Text("Vault Sync", 30)); signature.Children.Add(Ui.Text("Para seus vaults do Obsidian", 13, Ui.Muted)); brand.Children.Add(signature); panel.Children.Add(brand);
+        panel.Children.Add(Ui.Text("Local primeiro. Sincronização visível.", 18));
         panel.Children.Add(Ui.Text("Instalação para este usuário, sem administrador. O aplicativo inclui seu runtime e permite escolher as pastas no primeiro uso."));
         panel.Children.Add(Ui.Text("Destino: " + Installer.InstallRoot, 12, Ui.Muted));
         var startup = new CheckBox { Content = "Iniciar com o Windows", IsChecked = true, Foreground = Ui.Ink, Margin = new Thickness(0, 12, 0, 12) }; panel.Children.Add(startup);
         panel.Children.Add(Ui.Text("O aplicativo não é afiliado à Obsidian ou à Apple. A instalação não migra seus arquivos automaticamente.", 12, Ui.Muted));
-        panel.Children.Add(Ui.Button("Instalar e abrir", (_, _) =>
+        panel.Children.Add(Ui.Text("Desenvolvido por Natan Peixoto Maciel", 11, Ui.Muted));
+        panel.Children.Add(Ui.Primary(Ui.Button("Instalar e abrir", (_, _) =>
         {
             try { Installer.Install(startup.IsChecked == true, true); Close(); }
             catch (Exception ex) { ThemedDialog.Info(this, ex.Message); }
-        }));
+        })));
     }
 }

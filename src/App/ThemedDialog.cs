@@ -5,17 +5,19 @@ namespace VaultSync.App;
 
 internal sealed class ThemedDialog : Window
 {
+    internal static Action<ThemedDialog>? ConfirmationSmoke;
     internal ThemedDialog(string message, bool confirmation)
     {
         Title = Program.Product; Width = 460; Height = 245; MinWidth = 300; MinHeight = 190; ResizeMode = ResizeMode.NoResize;
         Ui.Style(this);
         var root = new DockPanel { Margin = new Thickness(8) };
         Ui.Chrome(this, root, confirmation ? "Confirmar alteração" : Program.Product);
-        var buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 12, 0, 0) };
-        var accept = Ui.Button(confirmation ? "Aplicar escolha" : "Entendi", (_, _) => DialogResult = true); accept.IsDefault = true;
+        var buttons = new WrapPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 12, 0, 0) };
+        var accept = Ui.Primary(Ui.Button(confirmation ? "Aplicar escolha" : "Entendi", (_, _) => DialogResult = true)); accept.IsDefault = true;
         if (confirmation) { var cancel = Ui.Button("Cancelar", (_, _) => DialogResult = false); cancel.IsCancel = true; buttons.Children.Add(cancel); }
         buttons.Children.Add(accept); DockPanel.SetDock(buttons, Dock.Bottom); root.Children.Add(buttons);
         root.Children.Add(new ScrollViewer { Content = Ui.Text(message), VerticalScrollBarVisibility = ScrollBarVisibility.Auto });
+        if (confirmation) Loaded += (_, _) => ConfirmationSmoke?.Invoke(this);
     }
     public static bool Confirm(Window? owner, string message) => Show(owner, message, true);
     public static void Info(Window? owner, string message) => Show(owner, message, false);

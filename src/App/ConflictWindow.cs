@@ -19,7 +19,7 @@ internal sealed class ConflictWindow : Window
         Title = "Comparar conflito · " + Program.Product; Width = 940; Height = 640; MinWidth = 620; MinHeight = 420; Ui.Style(this);
         var root = new DockPanel { Margin = new Thickness(6) }; Ui.Chrome(this, root, "Comparar conflito · Vault Sync");
         var header = new StackPanel(); DockPanel.SetDock(header, Dock.Top); root.Children.Add(header);
-        header.Children.Add(new TextBlock { Text = conflict.Path, FontSize = 16, Foreground = Ui.Accent, TextTrimming = TextTrimming.CharacterEllipsis, ToolTip = conflict.Path, Margin = new Thickness(0, 2, 0, 5) }); header.Children.Add(Ui.Text(conflict.Reason, 12, Ui.Muted));
+        header.Children.Add(new TextBlock { Text = conflict.Path, Tag = "UserContent", FontSize = 16, Foreground = Ui.Accent, TextTrimming = TextTrimming.CharacterEllipsis, ToolTip = conflict.Path, Margin = new Thickness(0, 2, 0, 5) }); header.Children.Add(Ui.Text(conflict.Reason, 12, Ui.Muted));
         header.Children.Add(Ui.Text("Este PC: " + (deviceName ?? Environment.MachineName) + ". A autoria da versão recebida pelo iCloud pode não estar disponível.", 12, Ui.Muted));
         var buttons = new WrapPanel { Margin = new Thickness(0, 6, 0, 0) };
         buttons.Children.Add(Ui.Button("Usar local", (_, _) => Choose("local"))); buttons.Children.Add(Ui.Button("Usar iCloud", (_, _) => Choose("cloud")));
@@ -52,6 +52,7 @@ internal sealed class ConflictWindow : Window
         if (!ThemedDialog.Confirm(this, "Aplicar esta escolha às duas pastas? O conteúdo será revalidado antes da alteração.")) return;
         Choice = choice; DialogResult = true;
     }
+    internal void ChooseSmoke(string choice) => Choose(choice);
     private static UIElement DiffPane(string title, FileStamp? stamp, string text, string other, FileStamp? opposite)
     {
         var root = new DockPanel { Margin = new Thickness(6) };
@@ -65,7 +66,7 @@ internal sealed class ConflictWindow : Window
         for (int i = 0; i < lines.Length; i++)
         {
             var p = new Paragraph(new Run($"{i + 1,4}  {lines[i]}")) { Margin = new Thickness(0), LineHeight = 19, TextAlignment = TextAlignment.Left };
-            if (i >= prefix && i < lines.Length - suffix) p.Background = new SolidColorBrush(Color.FromRgb(78, 57, 32));
+            if (i >= prefix && i < lines.Length - suffix) p.Background = Theme.Get("Diff");
             document.Blocks.Add(p);
         }
         root.Children.Add(new FlowDocumentScrollViewer { Document = document, IsToolBarVisible = false }); return root;
@@ -80,7 +81,7 @@ internal sealed class ConflictWindow : Window
             if (line.StartsWith("```", StringComparison.Ordinal)) { code = !code; continue; }
             int heading = line.TakeWhile(c => c == '#').Count();
             var p = new Paragraph(new Run(heading is > 0 and < 7 && !code ? line[heading..].TrimStart() : line)) { Margin = new Thickness(0, 3, 0, 6) };
-            if (code) { p.FontFamily = new FontFamily("Consolas"); p.Background = Brushes.Black; }
+            if (code) { p.FontFamily = new FontFamily("Consolas"); p.Background = Theme.Get("Code"); }
             else if (heading is > 0 and < 7) { p.FontSize = 26 - heading * 2; p.FontWeight = FontWeights.SemiBold; }
             doc.Blocks.Add(p);
         }
