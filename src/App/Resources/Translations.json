@@ -1,284 +1,1246 @@
 {
-  "Pastas e prévia": ["Folders and preview", "Carpetas y vista previa"],
-  "Conflitos": ["Conflicts", "Conflictos"],
-  "Log de execução": ["Activity log", "Registro de actividad"],
-  "Backups": ["Backups", "Copias de seguridad"],
-  "⚙ Configurações": ["⚙ Settings", "⚙ Configuración"],
-  "Configurações": ["Settings", "Configuración"],
-  "Aparência": ["Appearance", "Apariencia"],
-  "Idioma": ["Language", "Idioma"],
-  "A mudança de idioma é aplicada sem reiniciar o monitor.": ["The language changes without restarting the monitor.", "El idioma cambia sin reiniciar el monitor."],
-  "Tema · acompanhe o Windows ou escolha uma aparência fixa.": ["Theme · follow Windows or choose a fixed appearance.", "Tema · sigue Windows o elige una apariencia fija."],
-  "Tema do aplicativo": ["Application theme", "Tema de la aplicación"],
-  "Idioma do aplicativo": ["Application language", "Idioma de la aplicación"],
-  "Sistema": ["System", "Sistema"],
-  "Claro": ["Light", "Claro"],
-  "Escuro": ["Dark", "Oscuro"],
-  "Sincronização": ["Synchronization", "Sincronización"],
-  "Sobre": ["About", "Acerca de"],
-  "Desenvolvido por Natan Peixoto Maciel": ["Developed by Natan Peixoto Maciel", "Desarrollado por Natan Peixoto Maciel"],
-  "Abrir projeto no GitHub": ["Open project on GitHub", "Abrir proyecto en GitHub"],
-  "Para seus vaults do Obsidian": ["For your Obsidian vaults", "Para tus bóvedas de Obsidian"],
-  "Avaliação isolada": ["Isolated evaluation", "Evaluación aislada"],
-  "Projeto independente, sem afiliação à Obsidian ou à Apple.": ["Independent project, not affiliated with Obsidian or Apple.", "Proyecto independiente, sin afiliación con Obsidian ni Apple."],
-  "Projeto independente.": ["Independent project.", "Proyecto independiente."],
-  "Sem afiliação à Obsidian ou à Apple.": ["Not affiliated with Obsidian or Apple.", "Sin afiliación con Obsidian ni Apple."],
-  "Minimizar": ["Minimize", "Minimizar"],
-  "Maximizar / restaurar": ["Maximize / restore", "Maximizar / restaurar"],
-  "Fechar": ["Close", "Cerrar"],
-  "Minimizar para bandeja": ["Minimize to tray", "Minimizar a la bandeja"],
-  "Cópia entre pastas deste PC. A entrega à nuvem depende do iCloud.": ["Copies between folders on this PC. Cloud delivery depends on iCloud.", "Copia entre carpetas de este PC. La entrega a la nube depende de iCloud."],
-  "Iniciar sincronização": ["Start synchronization", "Iniciar sincronización"],
-  "■ Parar": ["■ Stop", "■ Detener"],
-  "Parar": ["Stop", "Detener"],
-  "Pausar": ["Pause", "Pausar"],
-  "Retomar": ["Resume", "Reanudar"],
-  "Conferir agora": ["Check now", "Comprobar ahora"],
-  "Abrir": ["Open", "Abrir"],
-  "Iniciar": ["Start", "Iniciar"],
-  "Sair": ["Exit", "Salir"],
-  "PARADO": ["STOPPED", "DETENIDO"],
-  "PAUSADO": ["PAUSED", "PAUSADO"],
-  "ATIVO": ["ACTIVE", "ACTIVO"],
-  "INICIANDO": ["STARTING", "INICIANDO"],
-  "MONITORANDO": ["MONITORING", "MONITORIZANDO"],
-  "VERIFICANDO": ["CHECKING", "COMPROBANDO"],
-  "CONFERINDO": ["CHECKING", "COMPROBANDO"],
-  "AGUARDANDO ACESSO": ["WAITING FOR ACCESS", "ESPERANDO ACCESO"],
-  "PRÉVIA PRONTA": ["PREVIEW READY", "VISTA PREVIA LISTA"],
-  "VERIFIQUE O LOG": ["CHECK THE LOG", "CONSULTA EL REGISTRO"],
-  "BACKUP OPCIONAL": ["OPTIONAL BACKUP", "COPIA DE SEGURIDAD OPCIONAL"],
-  "ERRO": ["ERROR", "ERROR"],
-  "ATENÇÃO": ["ATTENTION", "ATENCIÓN"],
-  "AVISO": ["WARNING", "AVISO"],
-  "PENDENTE": ["PENDING", "PENDIENTE"],
-  "CONFLITO": ["CONFLICT", "CONFLICTO"],
-  "Monitor desativado": ["Monitor stopped", "Monitor desactivado"],
-  "Escolha as pastas e clique em Iniciar sincronização.": ["Choose the folders and click Start synchronization.", "Elige las carpetas y pulsa Iniciar sincronización."],
-  "Selecione as duas pastas antes de verificar ou iniciar a sincronização.": ["Select both folders before checking or starting synchronization.", "Selecciona las dos carpetas antes de comprobar o iniciar la sincronización."],
-  "Escolha uma pasta antes de criar ou abrir.": ["Choose a folder before creating or opening it.", "Elige una carpeta antes de crearla o abrirla."],
-  "{0} conflitos · {1} pendências": ["{0} conflicts · {1} pending", "{0} conflictos · {1} pendientes"],
-  "{0} conflitos na prévia · {1} leituras adiadas": ["{0} preview conflicts · {1} deferred reads", "{0} conflictos en la vista previa · {1} lecturas aplazadas"],
-  "{0}/2 pastas observadas · última conferência {1}": ["{0}/2 folders monitored · last check {1}", "{0}/2 carpetas observadas · última comprobación {1}"],
-  "{0} conflitos · {1} pend.": ["{0} conflicts · {1} pending", "{0} conflictos · {1} pend."],
-  "em andamento": ["in progress", "en curso"],
-  "Conflitos · {0}": ["Conflicts · {0}", "Conflictos · {0}"],
-  "Pasta local de trabalho": ["Local working folder", "Carpeta local de trabajo"],
-  "Pasta correspondente no iCloud": ["Matching folder in iCloud", "Carpeta correspondiente en iCloud"],
-  "Caminho da pasta local": ["Local folder path", "Ruta de la carpeta local"],
-  "Caminho da pasta iCloud": ["iCloud folder path", "Ruta de la carpeta iCloud"],
-  "Escolher pasta": ["Choose folder", "Elegir carpeta"],
-  "Escolha a pasta": ["Choose a folder", "Elige una carpeta"],
-  "Criar": ["Create", "Crear"],
-  "Abrir pasta local": ["Open local folder", "Abrir carpeta local"],
-  "Abrir iCloud": ["Open iCloud folder", "Abrir carpeta iCloud"],
-  "Suas pastas · Local ⇄ iCloud": ["Your folders · Local ⇄ iCloud", "Tus carpetas · Local ⇄ iCloud"],
-  "Verificar / prévia": ["Check / preview", "Comprobar / vista previa"],
-  "Regra: conteúdo diferente → prevalece a data de modificação mais recente, em qualquer pasta. Datas iguais e exclusão contra edição pedem escolha.": ["Rule: different content → the latest modification wins on either side. Tied dates and deletion versus editing require a choice.", "Regla: contenido diferente → prevalece la modificación más reciente en cualquiera de las carpetas. Fechas iguales y eliminación frente a edición requieren una elección."],
-  "A prévia mostra o que será copiado antes de iniciar.": ["The preview shows what will be copied before starting.", "La vista previa muestra lo que se copiará antes de iniciar."],
-  "Arquivo": ["File", "Archivo"],
-  "Ação prevista": ["Planned action", "Acción prevista"],
-  "Local → iCloud": ["Local → iCloud", "Local → iCloud"],
-  "iCloud → Local": ["iCloud → Local", "iCloud → Local"],
-  "Excluir local": ["Delete local", "Eliminar local"],
-  "Excluir iCloud": ["Delete from iCloud", "Eliminar de iCloud"],
-  "Escolher versão": ["Choose version", "Elegir versión"],
-  "Igual": ["Identical", "Idéntico"],
-  "Nenhuma conferência realizada": ["No check performed yet", "Aún no se ha comprobado"],
-  "Use Verificar / prévia para inspecionar as diferenças antes de iniciar.": ["Use Check / preview to inspect differences before starting.", "Usa Comprobar / vista previa para revisar las diferencias antes de iniciar."],
-  "Nenhuma diferença na conferência": ["No differences found", "No se encontraron diferencias"],
-  "Os conteúdos lidos são iguais nas duas pastas.": ["The contents read are identical in both folders.", "Los contenidos leídos son idénticos en las dos carpetas."],
-  "Conferência incompleta": ["Incomplete check", "Comprobación incompleta"],
-  "Há leituras adiadas. Consulte os avisos; isso não significa que tudo está sincronizado.": ["Some reads were deferred. Check the warnings; this does not mean everything is synchronized.", "Hay lecturas aplazadas. Consulta los avisos; esto no significa que todo esté sincronizado."],
-  "Verificação necessária": ["Check required", "Comprobación necesaria"],
-  "Consulte o log. A ausência de itens não confirma que as pastas estejam sincronizadas.": ["Check the log. An empty list does not confirm that the folders are synchronized.", "Consulta el registro. Una lista vacía no confirma que las carpetas estén sincronizadas."],
-  "Prévia anterior ao início": ["Preview from before starting", "Vista previa anterior al inicio"],
-  "Acompanhe as operações atuais no log. Esta lista mostra a conferência anterior ao início.": ["Follow current operations in the log. This list shows the check performed before starting.", "Consulta las operaciones actuales en el registro. Esta lista muestra la comprobación anterior al inicio."],
-  "Uma pasta não está acessível. Consulte o log antes de prosseguir.": ["A folder is inaccessible. Check the log before proceeding.", "Una carpeta no está accesible. Consulta el registro antes de continuar."],
-  "Prévia: {0} cópias · {1} conflitos · {2} leituras adiadas.": ["Preview: {0} copies · {1} conflicts · {2} deferred reads.", "Vista previa: {0} copias · {1} conflictos · {2} lecturas aplazadas."],
-  "Nenhum conflito encontrado": ["No conflicts found", "No se encontraron conflictos"],
-  "Arquivos que precisarem da sua escolha aparecerão aqui.": ["Files requiring your choice will appear here.", "Los archivos que requieran tu elección aparecerán aquí."],
-  "Datas iguais, exclusão contra edição e recuperações exigem escolha. Datas diferentes usam a versão mais recente ao iniciar.": ["Tied dates, deletion versus editing and recoveries require a choice. Different dates use the latest version when starting.", "Fechas iguales, eliminación frente a edición y recuperaciones requieren una elección. Las fechas diferentes usan la versión más reciente al iniciar."],
-  "Comparar e resolver": ["Compare and resolve", "Comparar y resolver"],
-  "Atualizar lista": ["Refresh list", "Actualizar lista"],
-  "Selecione um arquivo e use Comparar; duplo clique ou Enter também abre.": ["Select a file and use Compare; double-click or Enter also opens it.", "Selecciona un archivo y usa Comparar; también puedes hacer doble clic o pulsar Intro."],
-  "Nenhum conflito selecionado. Selecione um arquivo na lista.": ["No conflict selected. Select a file from the list.", "No hay conflicto seleccionado. Selecciona un archivo de la lista."],
-  "Preparando versões atuais; aguardando a operação de sincronização em andamento…": ["Preparing current versions; waiting for the active synchronization operation…", "Preparando las versiones actuales; esperando la operación de sincronización en curso…"],
-  "Sincronizado: conteúdo idêntico nas duas pastas. Nenhum conflito para resolver.": ["Synchronized: identical content in both folders. No conflict to resolve.", "Sincronizado: contenido idéntico en las dos carpetas. No hay conflicto que resolver."],
-  "Comparação aberta com as versões atuais.": ["Comparison opened with the current versions.", "Comparación abierta con las versiones actuales."],
-  "Escolha aplicada e verificada nas duas pastas.": ["Choice applied and verified in both folders.", "Elección aplicada y verificada en las dos carpetas."],
-  "Diferença da prévia: escolha uma versão antes ou depois de iniciar.": ["Preview difference: choose a version before or after starting.", "Diferencia en la vista previa: elige una versión antes o después de iniciar."],
-  "Nenhuma atividade nesta sessão": ["No activity in this session", "Sin actividad en esta sesión"],
-  "Verificações, cópias e avisos aparecerão aqui.": ["Checks, copies and warnings will appear here.", "Las comprobaciones, copias y avisos aparecerán aquí."],
-  "Hora": ["Time", "Hora"],
-  "Estado": ["Status", "Estado"],
-  "Execução": ["Activity", "Actividad"],
-  "Abrir logs": ["Open logs", "Abrir registros"],
-  "Abrir com o Windows": ["Start with Windows", "Iniciar con Windows"],
-  "Incluir layouts do Obsidian (workspace*.json)": ["Include Obsidian layouts (workspace*.json)", "Incluir diseños de Obsidian (workspace*.json)"],
-  "Desativado por padrão: layouts são específicos de cada dispositivo e mudam constantemente.": ["Off by default: layouts are device-specific and change frequently.", "Desactivado por defecto: los diseños son propios de cada dispositivo y cambian con frecuencia."],
-  "Layouts = abas, painéis e barras laterais (workspace*.json). Notas, temas, plugins e demais configurações continuam incluídos. Pare o monitor para mudar esta opção e inicie novamente.": ["Layouts = tabs, panes and sidebars (workspace*.json). Notes, themes, plugins and other settings remain included. Stop the monitor to change this option, then start it again.", "Diseños = pestañas, paneles y barras laterales (workspace*.json). Las notas, temas, plugins y demás ajustes siguen incluidos. Detén el monitor para cambiar esta opción y vuelve a iniciarlo."],
-  "Backup é uma cópia avulsa para recuperação antes de alterações. É opcional: o monitor inicia e funciona sem ele.": ["A backup is a standalone recovery copy before changes. It is optional: the monitor can start and run without it.", "Una copia de seguridad es una copia independiente para recuperar datos antes de cambios. Es opcional: el monitor puede iniciarse y funcionar sin ella."],
-  "Criar backup opcional": ["Create optional backup", "Crear copia de seguridad opcional"],
-  "Abrir dados e backups": ["Open data and backups", "Abrir datos y copias de seguridad"],
-  "Revisar referências Obsidian / Codex": ["Review Obsidian / Codex references", "Revisar referencias de Obsidian / Codex"],
-  "Pare o monitor para criar uma cópia avulsa. Isso não é necessário para sincronizar.": ["Stop the monitor to create a standalone backup. This is not required for synchronization.", "Detén el monitor para crear una copia independiente. No es necesario para sincronizar."],
-  "Backup avulso concluído. Para sincronizar, clique em Iniciar sincronização.": ["Standalone backup completed. Click Start synchronization to synchronize.", "Copia independiente completada. Pulsa Iniciar sincronización para sincronizar."],
-  "Backup: {0}": ["Backup: {0}", "Copia de seguridad: {0}"],
-  "Comparar conflito · {0}": ["Compare conflict · {0}", "Comparar conflicto · {0}"],
-  "Usar local": ["Use local", "Usar local"],
-  "Usar iCloud": ["Use iCloud", "Usar iCloud"],
-  "Salvar combinação": ["Save merged version", "Guardar combinación"],
-  "Decidir depois": ["Decide later", "Decidir después"],
-  "Versões preservadas": ["Preserved versions", "Versiones conservadas"],
-  "Diferenças": ["Differences", "Diferencias"],
-  "Pré-visualização Markdown": ["Markdown preview", "Vista previa de Markdown"],
-  "Combinar manualmente": ["Merge manually", "Combinar manualmente"],
-  "LOCAL": ["LOCAL", "LOCAL"],
-  "ICLOUD": ["ICLOUD", "ICLOUD"],
-  "MAIS RECENTE": ["LATEST", "MÁS RECIENTE"],
-  "excluído": ["deleted", "eliminado"],
-  "Este PC: {0}. A autoria da versão recebida pelo iCloud pode não estar disponível.": ["This PC: {0}. Authorship of the version received through iCloud may be unavailable.", "Este PC: {0}. Puede que la autoría de la versión recibida por iCloud no esté disponible."],
-  "Confirmar alteração": ["Confirm change", "Confirmar cambio"],
-  "Aplicar escolha": ["Apply choice", "Aplicar elección"],
-  "Cancelar": ["Cancel", "Cancelar"],
-  "Entendi": ["OK", "Entendido"],
-  "Aplicar esta escolha às duas pastas? O conteúdo será revalidado antes da alteração.": ["Apply this choice to both folders? The content will be revalidated before the change.", "¿Aplicar esta elección a las dos carpetas? El contenido se volverá a validar antes del cambio."],
-  "Instalar · {0}": ["Install · {0}", "Instalar · {0}"],
-  "Local primeiro. Sincronização visível.": ["Local first. Visible synchronization.", "Primero local. Sincronización visible."],
-  "Instalação para este usuário, sem administrador. O aplicativo inclui seu runtime e permite escolher as pastas no primeiro uso.": ["Installs for this user without administrator access. The app includes its runtime and lets you choose the folders on first use.", "Se instala para este usuario sin acceso de administrador. La aplicación incluye su entorno de ejecución y permite elegir las carpetas en el primer uso."],
-  "Destino: {0}": ["Destination: {0}", "Destino: {0}"],
-  "Iniciar com o Windows": ["Start with Windows", "Iniciar con Windows"],
-  "O aplicativo não é afiliado à Obsidian ou à Apple. A instalação não migra seus arquivos automaticamente.": ["The app is not affiliated with Obsidian or Apple. Installation does not migrate your files automatically.", "La aplicación no está afiliada con Obsidian ni Apple. La instalación no migra tus archivos automáticamente."],
-  "Instalar e abrir": ["Install and open", "Instalar y abrir"],
-  "Revisar integração · {0}": ["Review integration · {0}", "Revisar integración · {0}"],
-  "Referências externas · revisão antes de aplicar": ["External references · review before applying", "Referencias externas · revisar antes de aplicar"],
-  "Aplicar alterações revisadas": ["Apply reviewed changes", "Aplicar cambios revisados"],
-  "Feche o Obsidian antes de atualizar suas referências.": ["Close Obsidian before updating its references.", "Cierra Obsidian antes de actualizar sus referencias."],
-  "Verifique as pastas antes de revisar as referências externas.": ["Check the folders before reviewing external references.", "Comprueba las carpetas antes de revisar las referencias externas."],
-  "Nenhuma referência externa correspondente foi encontrada.": ["No matching external references found.", "No se encontraron referencias externas coincidentes."],
-  "Aprovação necessária: estes arquivos pertencem a outros aplicativos.": ["Approval required: these files belong to other applications.", "Se requiere aprobación: estos archivos pertenecen a otras aplicaciones."],
-  "Feche o Obsidian e reinicie o Codex após a atualização. Hooks alterados podem exigir revisão humana no Codex; este aplicativo não altera confiança.": ["Close Obsidian and restart Codex after updating. Changed hooks may require human review in Codex; this app does not change trust settings.", "Cierra Obsidian y reinicia Codex tras actualizar. Los hooks modificados pueden requerir revisión humana en Codex; esta aplicación no cambia la confianza."],
-  "Origem: {0}": ["Source: {0}", "Origen: {0}"],
-  "Nova referência: {0}": ["New reference: {0}", "Nueva referencia: {0}"],
-  "ARQUIVO": ["FILE", "ARCHIVO"],
-  "JUNÇÃO": ["JUNCTION", "UNIÓN"],
-  "Os vínculos relativos dentro do vault serão preservados. Referências em documentos históricos não serão reescritas. Aplicativos com caminhos abertos devem ser reabertos na pasta local.": ["Relative links inside the vault will be preserved. References in historical documents will not be rewritten. Reopen applications in the local folder.", "Se conservarán los enlaces relativos dentro de la bóveda. No se reescribirán referencias en documentos históricos. Vuelve a abrir las aplicaciones en la carpeta local."],
-  "Aplicar as alterações exibidas? Os arquivos anteriores serão guardados em um backup local. Reinicie o Codex e revise seus hooks depois.": ["Apply the displayed changes? Previous files will be saved in a local backup. Restart Codex and review its hooks afterwards.", "¿Aplicar los cambios mostrados? Los archivos anteriores se guardarán en una copia local. Reinicia Codex y revisa sus hooks después."],
-  "O aplicativo já está em execução. Abra pelo ícone na bandeja.": ["The app is already running. Open it from the tray icon.", "La aplicación ya está en ejecución. Ábrela desde el icono de la bandeja."],
-  "Não foi possível reabrir a janela existente. Encerre o Vault Sync pelo Gerenciador de Tarefas e tente novamente.": ["Could not reopen the existing window. Close Vault Sync in Task Manager and try again.", "No se pudo volver a abrir la ventana existente. Cierra Vault Sync desde el Administrador de tareas e inténtalo de nuevo."],
-  "Feche o aplicativo pelo ícone da bandeja antes de desinstalar.": ["Close the app from the tray icon before uninstalling.", "Cierra la aplicación desde el icono de la bandeja antes de desinstalar."],
-  "Desinstalar {0}?": ["Uninstall {0}?", "¿Desinstalar {0}?"],
-  "Conflitos preservados: {0}": ["Preserved conflicts: {0}", "Conflictos conservados: {0}"],
-  "Pendências registradas: {0}": ["Recorded pending items: {0}", "Pendientes registrados: {0}"],
-  "Os vaults, backups e estado local serão preservados em:": ["Vaults, backups and local state will be preserved at:", "Las bóvedas, copias de seguridad y el estado local se conservarán en:"],
-  "Primeira conferência em andamento. O monitor continuará ativo.": ["Initial check in progress. The monitor will remain active.", "Primera comprobación en curso. El monitor seguirá activo."],
-  "Nenhum arquivo será copiado. Clique em Iniciar sincronização para retomar.": ["No files will be copied. Click Start synchronization to resume.", "No se copiará ningún archivo. Pulsa Iniciar sincronización para reanudar."],
-  "Lendo arquivos para mostrar a prévia…": ["Reading files to show the preview…", "Leyendo archivos para mostrar la vista previa…"],
-  "Clique em Iniciar sincronização para copiar e monitorar automaticamente.": ["Click Start synchronization to copy and monitor automatically.", "Pulsa Iniciar sincronización para copiar y supervisar automáticamente."],
-  "Uma das pastas não está acessível. Corrija e tente iniciar novamente.": ["A folder is inaccessible. Fix it and try starting again.", "Una carpeta no está accesible. Corrígelo e intenta iniciar de nuevo."],
-  "Uma operação está em andamento. Aguarde a conclusão indicada no log.": ["An operation is running. Wait for completion in the log.", "Hay una operación en curso. Espera a que el registro indique su finalización."],
-  "Nova regra: vence a data de modificação mais recente. Revise a prévia e clique em Iniciar sincronização para ativá-la.": ["New rule: the latest modification wins. Review the preview and click Start synchronization to enable it.", "Nueva regla: prevalece la modificación más reciente. Revisa la vista previa y pulsa Iniciar sincronización para activarla."],
-  "Cancelando a operação para fechar…": ["Canceling the operation before closing…", "Cancelando la operación antes de cerrar…"],
-  "Janela recolhida. O estado do monitor aparece no ícone da bandeja.": ["Window hidden. The tray icon shows the monitor status.", "Ventana oculta. El icono de la bandeja muestra el estado del monitor."],
-  "Aplicativo aberto. Monitor PARADO: configure as pastas e clique em Iniciar sincronização.": ["App opened. Monitor STOPPED: configure the folders and click Start synchronization.", "Aplicación abierta. Monitor DETENIDO: configura las carpetas y pulsa Iniciar sincronización."],
-  "Configuração carregada. Monitor PARADO até clicar em Iniciar sincronização.": ["Configuration loaded. Monitor STOPPED until you click Start synchronization.", "Configuración cargada. Monitor DETENIDO hasta pulsar Iniciar sincronización."],
-  "Verificação das pastas iniciada.": ["Folder check started.", "Comprobación de carpetas iniciada."],
-  "Operação cancelada.": ["Operation canceled.", "Operación cancelada."],
-  "Pasta criada: {0}": ["Folder created: {0}", "Carpeta creada: {0}"],
-  "Pasta aberta: {0}": ["Folder opened: {0}", "Carpeta abierta: {0}"],
-  "A pasta ainda não existe: {0}": ["The folder does not exist yet: {0}", "La carpeta aún no existe: {0}"],
-  "As pastas devem ser diferentes e não podem estar uma dentro da outra.": ["Folders must be different and cannot be nested inside each other.", "Las carpetas deben ser diferentes y no pueden estar una dentro de la otra."],
-  "As pastas de dados não podem se sobrepor ao estado do aplicativo.": ["Data folders cannot overlap the application state.", "Las carpetas de datos no pueden solaparse con el estado de la aplicación."],
-  "Selecione uma pasta em disco local, não uma unidade inteira ou endereço de rede.": ["Select a local disk folder, not an entire drive or network address.", "Selecciona una carpeta en un disco local, no una unidad completa ni una dirección de red."],
-  "Caminho relativo inválido.": ["Invalid relative path.", "Ruta relativa no válida."],
-  "Caminho fora da raiz.": ["Path outside the root.", "Ruta fuera de la raíz."],
-  "Link/junção não percorrido: {0}": ["Link/junction not traversed: {0}", "Enlace/unión no recorrido: {0}"],
-  "Monitorando": ["Monitoring", "Monitorizando"],
-  "Iniciando": ["Starting", "Iniciando"],
-  "Pausado": ["Paused", "Pausado"],
-  "Monitor pausado": ["Monitor paused", "Monitor pausado"],
-  "Conferindo": ["Checking", "Comprobando"],
-  "Aguardando acesso": ["Waiting for access", "Esperando acceso"],
-  "Aguardando primeira conferência": ["Waiting for the initial check", "Esperando la primera comprobación"],
-  "Monitor iniciado. Observando alterações Local ↔ iCloud.": ["Monitor started. Watching Local ↔ iCloud changes.", "Monitor iniciado. Observando cambios Local ↔ iCloud."],
-  "Monitor perdeu eventos; conferência completa solicitada.": ["The monitor missed events; a full check was requested.", "El monitor perdió eventos; se solicitó una comprobación completa."],
-  "Monitor pausado pelo usuário.": ["Monitor paused by the user.", "Monitor pausado por el usuario."],
-  "Monitor retomado pelo usuário.": ["Monitor resumed by the user.", "Monitor reanudado por el usuario."],
-  "Conferência manual solicitada.": ["Manual check requested.", "Comprobación manual solicitada."],
-  "O monitor está pausado. Nenhuma alteração será copiada.": ["The monitor is paused. No changes will be copied.", "El monitor está pausado. No se copiará ningún cambio."],
-  "Conferindo arquivos; o monitor está ativo.": ["Checking files; the monitor is active.", "Comprobando archivos; el monitor está activo."],
-  "Conferência completa iniciada.": ["Full check started.", "Comprobación completa iniciada."],
-  "Conferência concluída: {0} arquivos; {1} leituras adiadas.": ["Check completed: {0} files; {1} deferred reads.", "Comprobación completada: {0} archivos; {1} lecturas aplazadas."],
-  "Ativo · aguardando alterações nas duas pastas.": ["Active · waiting for changes in both folders.", "Activo · esperando cambios en las dos carpetas."],
-  "Monitor ativo, nova tentativa automática: {0}": ["Monitor active, automatic retry: {0}", "Monitor activo, nuevo intento automático: {0}"],
-  "Conflito resolvido e verificado.": ["Conflict resolved and verified.", "Conflicto resuelto y verificado."],
-  "Monitor parado. Nenhum arquivo será sincronizado até iniciar novamente.": ["Monitor stopped. No files will be synchronized until it starts again.", "Monitor detenido. No se sincronizarán archivos hasta volver a iniciarlo."],
-  "Raiz indisponível; cópia de segurança adiada.": ["Root unavailable; backup deferred.", "Raíz no disponible; copia de seguridad aplazada."],
-  "Raiz indisponível; nada será excluído: {0}": ["Root unavailable; nothing will be deleted: {0}", "Raíz no disponible; no se eliminará nada: {0}"],
-  "Raiz ainda não disponível localmente: {0}": ["Root not yet available locally: {0}", "Raíz aún no disponible localmente: {0}"],
-  "Raiz indisponível: {0}": ["Root unavailable: {0}", "Raíz no disponible: {0}"],
-  "Baixe e mantenha neste dispositivo: {0}": ["Download and keep on this device: {0}", "Descarga y mantén en este dispositivo: {0}"],
-  "Uma pasta ocupa o lugar de um arquivo: {0}": ["A folder occupies a file path: {0}", "Una carpeta ocupa la ruta de un archivo: {0}"],
-  "Arquivo mudou durante a leitura: {0}": ["File changed while being read: {0}", "El archivo cambió durante la lectura: {0}"],
-  "Arquivo mudou desde a comparação; será conferido novamente: {0}": ["File changed since comparison; it will be checked again: {0}", "El archivo cambió desde la comparación; se comprobará de nuevo: {0}"],
-  "Verificação da cópia falhou: {0}": ["Copy verification failed: {0}", "Falló la verificación de la copia: {0}"],
-  "O arquivo mudou durante a conferência. Tente abrir novamente.": ["The file changed during the check. Try opening it again.", "El archivo cambió durante la comprobación. Intenta abrirlo de nuevo."],
-  "O arquivo mudou enquanto a comparação era preparada. Tente abrir novamente.": ["The file changed while preparing the comparison. Try opening it again.", "El archivo cambió al preparar la comparación. Intenta abrirlo de nuevo."],
-  "As versões mudaram. Reabra o conflito para comparar novamente.": ["The versions changed. Reopen the conflict to compare again.", "Las versiones cambiaron. Vuelve a abrir el conflicto para comparar de nuevo."],
-  "Combinação disponível apenas para Markdown.": ["Merging is available only for Markdown.", "La combinación solo está disponible para Markdown."],
-  "Nova alteração durante resolução; conflito continua preservado.": ["New change during resolution; the conflict remains preserved.", "Nuevo cambio durante la resolución; el conflicto sigue conservado."],
-  "Exclusão contra edição ou conteúdo não registrado": ["Deletion versus editing or untracked content", "Eliminación frente a edición o contenido no registrado"],
-  "Datas de modificação iguais com conteúdos diferentes": ["Matching modification dates with different content", "Fechas de modificación iguales con contenido diferente"],
-  "Cópia para iCloud verificada": ["Copy to iCloud verified", "Copia a iCloud verificada"],
-  "Cópia para local verificada": ["Copy to local verified", "Copia local verificada"],
-  "BLOQUEIO": ["BLOCKED", "BLOQUEO"],
-  "Prévia isolada de referências externas.": ["Isolated preview of external references.", "Vista previa aislada de referencias externas."],
-  "Nenhum arquivo externo foi lido ou alterado nesta demonstração.": ["No external files were read or changed in this demonstration.", "No se leyó ni modificó ningún archivo externo en esta demostración."],
-  "RECUPERAÇÃO": ["RECOVERY", "RECUPERACIÓN"],
-  "Cópia de segurança opcional iniciada.": ["Optional backup started.", "Copia de seguridad opcional iniciada."],
-  "Backup adiou arquivo em uso: {0}": ["Backup deferred a busy file: {0}", "La copia de seguridad aplazó un archivo en uso: {0}"],
-  "Backup concluído: {0} cópias verificadas; {1} arquivos/leituras adiados. Consulte manifest.json.": ["Backup completed: {0} verified copies; {1} files/reads deferred. See manifest.json.", "Copia de seguridad completada: {0} copias verificadas; {1} archivos/lecturas aplazados. Consulta manifest.json."],
-  "Arquivo/subpasta adiado; os demais continuam. {0}": ["File/subfolder deferred; the others continue. {0}", "Archivo/subcarpeta aplazado; los demás continúan. {0}"],
-  "Nova tentativa automática: {0}": ["Automatic retry: {0}", "Nuevo intento automático: {0}"],
-  "Conteúdo atual idêntico. Versões de recuperação preservadas em: {0}": ["Current content is identical. Recovery versions preserved at: {0}", "El contenido actual es idéntico. Versiones de recuperación conservadas en: {0}"],
-  "Sincronizado: os dois lados têm conteúdo idêntico; conflito encerrado.": ["Synchronized: both sides have identical content; conflict cleared.", "Sincronizado: ambos lados tienen contenido idéntico; conflicto cerrado."],
-  "Igualdade será conferida novamente: {0}": ["Equality will be checked again: {0}", "Se volverá a comprobar la igualdad: {0}"],
-  "Conferência do conflito adiada: {0}": ["Conflict check deferred: {0}", "Comprobación del conflicto aplazada: {0}"],
-  "Datas iguais com conteúdos diferentes, ou exclusão contra edição": ["Tied dates with different content, or deletion versus editing", "Fechas iguales con contenido diferente, o eliminación frente a edición"],
-  "Edições concorrentes ou divergência inicial": ["Concurrent edits or initial differences", "Ediciones simultáneas o diferencias iniciales"],
-  "Alteração concorrente durante a operação": ["Concurrent change during the operation", "Cambio simultáneo durante la operación"],
-  "Copiado Local → iCloud": ["Copied Local → iCloud", "Copiado Local → iCloud"],
-  "Copiado iCloud → Local": ["Copied iCloud → Local", "Copiado iCloud → Local"],
-  "Exclusão aplicada na pasta local": ["Deletion applied in the local folder", "Eliminación aplicada en la carpeta local"],
-  "Exclusão aplicada na pasta iCloud": ["Deletion applied in the iCloud folder", "Eliminación aplicada en la carpeta iCloud"],
-  "Conteúdo verificado": ["Content verified", "Contenido verificado"],
-  "Outra aplicação substituiu o arquivo durante a gravação": ["Another application replaced the file while writing", "Otra aplicación sustituyó el archivo durante la escritura"],
-  "Edição concorrente com exclusão": ["Concurrent editing and deletion", "Edición y eliminación simultáneas"],
-  "Preparação interrompida retomada sem criar conflito.": ["Interrupted preparation resumed without creating a conflict.", "Preparación interrumpida reanudada sin crear un conflicto."],
-  "Operação interrompida; revise as versões preservadas antes de continuar": ["Operation interrupted; review the preserved versions before continuing", "Operación interrumpida; revisa las versiones conservadas antes de continuar"],
-  "O arquivo mudou desde que o conflito foi aberto": ["The file changed after opening the conflict", "El archivo cambió desde que se abrió el conflicto"],
-  "Resolução em andamento": ["Resolution in progress", "Resolución en curso"],
-  "Conflito resolvido e verificado nas duas pastas.": ["Conflict resolved and verified in both folders.", "Conflicto resuelto y verificado en las dos carpetas."],
-  "Uma das pastas está indisponível. Nenhuma exclusão será aplicada. {0}": ["A folder is unavailable. No deletions will be applied. {0}", "Una carpeta no está disponible. No se aplicará ninguna eliminación. {0}"],
-  "O conteúdo mudou durante a conferência de igualdade.": ["The content changed during the equality check.", "El contenido cambió durante la comprobación de igualdad."],
-  "Versão concorrente preservada no conflito: {0}": ["Concurrent version preserved in the conflict: {0}", "Versión simultánea conservada en el conflicto: {0}"],
-  "Exclusão interrompida: versão concorrente preservada.": ["Deletion interrupted: concurrent version preserved.", "Eliminación interrumpida: versión simultánea conservada."],
-  "Registro de recuperação inválido.": ["Invalid recovery record.", "Registro de recuperación no válido."],
-  "Registro de operação fora das raízes; recuperação bloqueada.": ["Operation record outside the roots; recovery blocked.", "Registro de operación fuera de las raíces; recuperación bloqueada."],
-  "Temporário inválido no registro de recuperação.": ["Invalid temporary file in the recovery record.", "Archivo temporal no válido en el registro de recuperación."],
-  "Arquivo mudou durante a cópia: {0}": ["File changed during copying: {0}", "El archivo cambió durante la copia: {0}"],
-  "A cópia local ainda não contém AGENTS.md. Conclua a cópia verificada primeiro.": ["The local copy does not contain AGENTS.md yet. Complete the verified copy first.", "La copia local aún no contiene AGENTS.md. Completa primero la copia verificada."],
-  "Arquivo alterado após a prévia: {0}": ["File changed after the preview: {0}", "Archivo modificado después de la vista previa: {0}"],
-  "Edição concorrente detectada: {0}": ["Concurrent edit detected: {0}", "Edición simultánea detectada: {0}"],
-  "Falha na verificação: {0}": ["Verification failed: {0}", "Falló la verificación: {0}"],
-  "Skill local ainda ausente; junção anterior preservada.": ["Local skill still missing; previous junction preserved.", "La skill local aún no existe; se conserva la unión anterior."],
-  "A junção mudou desde a prévia.": ["The junction changed since the preview.", "La unión cambió desde la vista previa."],
-  "Junção não verificada.": ["Junction not verified.", "Unión no verificada."],
-  "Atualizações verificadas. Backup: {0}": ["Updates verified. Backup: {0}", "Actualizaciones verificadas. Copia de seguridad: {0}"],
-  "Reinicie os aplicativos e revise hooks no Codex.": ["Restart the applications and review hooks in Codex.", "Reinicia las aplicaciones y revisa los hooks en Codex."],
-  "Integração interrompida. Confira o relatório e os backups antes de repetir.": ["Integration interrupted. Check the report and backups before retrying.", "Integración interrumpida. Revisa el informe y las copias de seguridad antes de reintentar."],
-  "Não foi possível criar o atalho do menu Iniciar.": ["Could not create the Start menu shortcut.", "No se pudo crear el acceso directo del menú Inicio."],
-  "Feche o Vault Sync pelo ícone da bandeja antes de atualizar.": ["Close Vault Sync from the tray icon before updating.", "Cierra Vault Sync desde el icono de la bandeja antes de actualizar."],
-  "Instalador copiado com conteúdo divergente.": ["Copied installer content did not match.", "El contenido del instalador copiado no coincide."]
+  "Pastas e prévia": [
+    "Folders and preview",
+    "Carpetas y vista previa"
+  ],
+  "Conflitos": [
+    "Conflicts",
+    "Conflictos"
+  ],
+  "Log de execução": [
+    "Activity log",
+    "Registro de actividad"
+  ],
+  "Backups": [
+    "Backups",
+    "Copias de seguridad"
+  ],
+  "⚙ Configurações": [
+    "⚙ Settings",
+    "⚙ Configuración"
+  ],
+  "Configurações": [
+    "Settings",
+    "Configuración"
+  ],
+  "Aparência": [
+    "Appearance",
+    "Apariencia"
+  ],
+  "Idioma": [
+    "Language",
+    "Idioma"
+  ],
+  "A mudança de idioma é aplicada sem reiniciar o monitor.": [
+    "The language changes without restarting the monitor.",
+    "El idioma cambia sin reiniciar el monitor."
+  ],
+  "Tema · acompanhe o Windows ou escolha uma aparência fixa.": [
+    "Theme · follow Windows or choose a fixed appearance.",
+    "Tema · sigue Windows o elige una apariencia fija."
+  ],
+  "Tema do aplicativo": [
+    "Application theme",
+    "Tema de la aplicación"
+  ],
+  "Idioma do aplicativo": [
+    "Application language",
+    "Idioma de la aplicación"
+  ],
+  "Sistema": [
+    "System",
+    "Sistema"
+  ],
+  "Claro": [
+    "Light",
+    "Claro"
+  ],
+  "Escuro": [
+    "Dark",
+    "Oscuro"
+  ],
+  "Sincronização": [
+    "Synchronization",
+    "Sincronización"
+  ],
+  "Sobre": [
+    "About",
+    "Acerca de"
+  ],
+  "Desenvolvido por Natan Peixoto Maciel": [
+    "Developed by Natan Peixoto Maciel",
+    "Desarrollado por Natan Peixoto Maciel"
+  ],
+  "Abrir projeto no GitHub": [
+    "Open project on GitHub",
+    "Abrir proyecto en GitHub"
+  ],
+  "Para seus vaults do Obsidian": [
+    "For your Obsidian vaults",
+    "Para tus bóvedas de Obsidian"
+  ],
+  "Avaliação isolada": [
+    "Isolated evaluation",
+    "Evaluación aislada"
+  ],
+  "Projeto independente, sem afiliação à Obsidian ou à Apple.": [
+    "Independent project, not affiliated with Obsidian or Apple.",
+    "Proyecto independiente, sin afiliación con Obsidian ni Apple."
+  ],
+  "Projeto independente.": [
+    "Independent project.",
+    "Proyecto independiente."
+  ],
+  "Sem afiliação à Obsidian ou à Apple.": [
+    "Not affiliated with Obsidian or Apple.",
+    "Sin afiliación con Obsidian ni Apple."
+  ],
+  "Minimizar": [
+    "Minimize",
+    "Minimizar"
+  ],
+  "Maximizar / restaurar": [
+    "Maximize / restore",
+    "Maximizar / restaurar"
+  ],
+  "Fechar": [
+    "Close",
+    "Cerrar"
+  ],
+  "Minimizar para bandeja": [
+    "Minimize to tray",
+    "Minimizar a la bandeja"
+  ],
+  "Cópia entre pastas deste PC. A entrega à nuvem depende do iCloud.": [
+    "Copies between folders on this PC. Cloud delivery depends on iCloud.",
+    "Copia entre carpetas de este PC. La entrega a la nube depende de iCloud."
+  ],
+  "Iniciar sincronização": [
+    "Start synchronization",
+    "Iniciar sincronización"
+  ],
+  "■ Parar": [
+    "■ Stop",
+    "■ Detener"
+  ],
+  "Parar": [
+    "Stop",
+    "Detener"
+  ],
+  "Pausar": [
+    "Pause",
+    "Pausar"
+  ],
+  "Retomar": [
+    "Resume",
+    "Reanudar"
+  ],
+  "Conferir agora": [
+    "Check now",
+    "Comprobar ahora"
+  ],
+  "Abrir": [
+    "Open",
+    "Abrir"
+  ],
+  "Iniciar": [
+    "Start",
+    "Iniciar"
+  ],
+  "Sair": [
+    "Exit",
+    "Salir"
+  ],
+  "PARADO": [
+    "STOPPED",
+    "DETENIDO"
+  ],
+  "PAUSADO": [
+    "PAUSED",
+    "PAUSADO"
+  ],
+  "ATIVO": [
+    "ACTIVE",
+    "ACTIVO"
+  ],
+  "INICIANDO": [
+    "STARTING",
+    "INICIANDO"
+  ],
+  "MONITORANDO": [
+    "MONITORING",
+    "MONITORIZANDO"
+  ],
+  "VERIFICANDO": [
+    "CHECKING",
+    "COMPROBANDO"
+  ],
+  "CONFERINDO": [
+    "CHECKING",
+    "COMPROBANDO"
+  ],
+  "AGUARDANDO ACESSO": [
+    "WAITING FOR ACCESS",
+    "ESPERANDO ACCESO"
+  ],
+  "PRÉVIA PRONTA": [
+    "PREVIEW READY",
+    "VISTA PREVIA LISTA"
+  ],
+  "VERIFIQUE O LOG": [
+    "CHECK THE LOG",
+    "CONSULTA EL REGISTRO"
+  ],
+  "BACKUP OPCIONAL": [
+    "OPTIONAL BACKUP",
+    "COPIA DE SEGURIDAD OPCIONAL"
+  ],
+  "ERRO": [
+    "ERROR",
+    "ERROR"
+  ],
+  "ATENÇÃO": [
+    "ATTENTION",
+    "ATENCIÓN"
+  ],
+  "AVISO": [
+    "WARNING",
+    "AVISO"
+  ],
+  "PENDENTE": [
+    "PENDING",
+    "PENDIENTE"
+  ],
+  "CONFLITO": [
+    "CONFLICT",
+    "CONFLICTO"
+  ],
+  "Monitor desativado": [
+    "Monitor stopped",
+    "Monitor desactivado"
+  ],
+  "Escolha as pastas e clique em Iniciar sincronização.": [
+    "Choose the folders and click Start synchronization.",
+    "Elige las carpetas y pulsa Iniciar sincronización."
+  ],
+  "Selecione as duas pastas antes de verificar ou iniciar a sincronização.": [
+    "Select both folders before checking or starting synchronization.",
+    "Selecciona las dos carpetas antes de comprobar o iniciar la sincronización."
+  ],
+  "Escolha uma pasta antes de criar ou abrir.": [
+    "Choose a folder before creating or opening it.",
+    "Elige una carpeta antes de crearla o abrirla."
+  ],
+  "{0} conflitos · {1} pendências": [
+    "{0} conflicts · {1} pending",
+    "{0} conflictos · {1} pendientes"
+  ],
+  "{0} conflitos na prévia · {1} leituras adiadas": [
+    "{0} preview conflicts · {1} deferred reads",
+    "{0} conflictos en la vista previa · {1} lecturas aplazadas"
+  ],
+  "{0}/2 pastas observadas · última conferência {1}": [
+    "{0}/2 folders monitored · last check {1}",
+    "{0}/2 carpetas observadas · última comprobación {1}"
+  ],
+  "{0} conflitos · {1} pend.": [
+    "{0} conflicts · {1} pending",
+    "{0} conflictos · {1} pend."
+  ],
+  "em andamento": [
+    "in progress",
+    "en curso"
+  ],
+  "Conflitos · {0}": [
+    "Conflicts · {0}",
+    "Conflictos · {0}"
+  ],
+  "Pasta local de trabalho": [
+    "Local working folder",
+    "Carpeta local de trabajo"
+  ],
+  "Pasta correspondente no iCloud": [
+    "Matching folder in iCloud",
+    "Carpeta correspondiente en iCloud"
+  ],
+  "Caminho da pasta local": [
+    "Local folder path",
+    "Ruta de la carpeta local"
+  ],
+  "Caminho da pasta iCloud": [
+    "iCloud folder path",
+    "Ruta de la carpeta iCloud"
+  ],
+  "Escolher pasta": [
+    "Choose folder",
+    "Elegir carpeta"
+  ],
+  "Escolha a pasta": [
+    "Choose a folder",
+    "Elige una carpeta"
+  ],
+  "Criar": [
+    "Create",
+    "Crear"
+  ],
+  "Abrir pasta local": [
+    "Open local folder",
+    "Abrir carpeta local"
+  ],
+  "Abrir iCloud": [
+    "Open iCloud folder",
+    "Abrir carpeta iCloud"
+  ],
+  "Suas pastas · Local ⇄ iCloud": [
+    "Your folders · Local ⇄ iCloud",
+    "Tus carpetas · Local ⇄ iCloud"
+  ],
+  "Verificar / prévia": [
+    "Check / preview",
+    "Comprobar / vista previa"
+  ],
+  "Regra: conteúdo diferente → prevalece a data de modificação mais recente, em qualquer pasta. Datas iguais e exclusão contra edição pedem escolha.": [
+    "Rule: different content → the latest modification wins on either side. Tied dates and deletion versus editing require a choice.",
+    "Regla: contenido diferente → prevalece la modificación más reciente en cualquiera de las carpetas. Fechas iguales y eliminación frente a edición requieren una elección."
+  ],
+  "A prévia mostra o que será copiado antes de iniciar.": [
+    "The preview shows what will be copied before starting.",
+    "La vista previa muestra lo que se copiará antes de iniciar."
+  ],
+  "Arquivo": [
+    "File",
+    "Archivo"
+  ],
+  "Ação prevista": [
+    "Planned action",
+    "Acción prevista"
+  ],
+  "Local → iCloud": [
+    "Local → iCloud",
+    "Local → iCloud"
+  ],
+  "iCloud → Local": [
+    "iCloud → Local",
+    "iCloud → Local"
+  ],
+  "Excluir local": [
+    "Delete local",
+    "Eliminar local"
+  ],
+  "Excluir iCloud": [
+    "Delete from iCloud",
+    "Eliminar de iCloud"
+  ],
+  "Escolher versão": [
+    "Choose version",
+    "Elegir versión"
+  ],
+  "Igual": [
+    "Identical",
+    "Idéntico"
+  ],
+  "Nenhuma conferência realizada": [
+    "No check performed yet",
+    "Aún no se ha comprobado"
+  ],
+  "Use Verificar / prévia para inspecionar as diferenças antes de iniciar.": [
+    "Use Check / preview to inspect differences before starting.",
+    "Usa Comprobar / vista previa para revisar las diferencias antes de iniciar."
+  ],
+  "Nenhuma diferença na conferência": [
+    "No differences found",
+    "No se encontraron diferencias"
+  ],
+  "Os conteúdos lidos são iguais nas duas pastas.": [
+    "The contents read are identical in both folders.",
+    "Los contenidos leídos son idénticos en las dos carpetas."
+  ],
+  "Conferência incompleta": [
+    "Incomplete check",
+    "Comprobación incompleta"
+  ],
+  "Há leituras adiadas. Consulte os avisos; isso não significa que tudo está sincronizado.": [
+    "Some reads were deferred. Check the warnings; this does not mean everything is synchronized.",
+    "Hay lecturas aplazadas. Consulta los avisos; esto no significa que todo esté sincronizado."
+  ],
+  "Verificação necessária": [
+    "Check required",
+    "Comprobación necesaria"
+  ],
+  "Consulte o log. A ausência de itens não confirma que as pastas estejam sincronizadas.": [
+    "Check the log. An empty list does not confirm that the folders are synchronized.",
+    "Consulta el registro. Una lista vacía no confirma que las carpetas estén sincronizadas."
+  ],
+  "Prévia anterior ao início": [
+    "Preview from before starting",
+    "Vista previa anterior al inicio"
+  ],
+  "Acompanhe as operações atuais no log. Esta lista mostra a conferência anterior ao início.": [
+    "Follow current operations in the log. This list shows the check performed before starting.",
+    "Consulta las operaciones actuales en el registro. Esta lista muestra la comprobación anterior al inicio."
+  ],
+  "Uma pasta não está acessível. Consulte o log antes de prosseguir.": [
+    "A folder is inaccessible. Check the log before proceeding.",
+    "Una carpeta no está accesible. Consulta el registro antes de continuar."
+  ],
+  "Prévia: {0} cópias · {1} conflitos · {2} leituras adiadas.": [
+    "Preview: {0} copies · {1} conflicts · {2} deferred reads.",
+    "Vista previa: {0} copias · {1} conflictos · {2} lecturas aplazadas."
+  ],
+  "Nenhum conflito encontrado": [
+    "No conflicts found",
+    "No se encontraron conflictos"
+  ],
+  "Arquivos que precisarem da sua escolha aparecerão aqui.": [
+    "Files requiring your choice will appear here.",
+    "Los archivos que requieran tu elección aparecerán aquí."
+  ],
+  "Datas iguais, exclusão contra edição e recuperações exigem escolha. Datas diferentes usam a versão mais recente ao iniciar.": [
+    "Tied dates, deletion versus editing and recoveries require a choice. Different dates use the latest version when starting.",
+    "Fechas iguales, eliminación frente a edición y recuperaciones requieren una elección. Las fechas diferentes usan la versión más reciente al iniciar."
+  ],
+  "Comparar e resolver": [
+    "Compare and resolve",
+    "Comparar y resolver"
+  ],
+  "Atualizar lista": [
+    "Refresh list",
+    "Actualizar lista"
+  ],
+  "Selecione um arquivo e use Comparar; duplo clique ou Enter também abre.": [
+    "Select a file and use Compare; double-click or Enter also opens it.",
+    "Selecciona un archivo y usa Comparar; también puedes hacer doble clic o pulsar Intro."
+  ],
+  "Nenhum conflito selecionado. Selecione um arquivo na lista.": [
+    "No conflict selected. Select a file from the list.",
+    "No hay conflicto seleccionado. Selecciona un archivo de la lista."
+  ],
+  "Preparando versões atuais; aguardando a operação de sincronização em andamento…": [
+    "Preparing current versions; waiting for the active synchronization operation…",
+    "Preparando las versiones actuales; esperando la operación de sincronización en curso…"
+  ],
+  "Sincronizado: conteúdo idêntico nas duas pastas. Nenhum conflito para resolver.": [
+    "Synchronized: identical content in both folders. No conflict to resolve.",
+    "Sincronizado: contenido idéntico en las dos carpetas. No hay conflicto que resolver."
+  ],
+  "Comparação aberta com as versões atuais.": [
+    "Comparison opened with the current versions.",
+    "Comparación abierta con las versiones actuales."
+  ],
+  "Escolha aplicada e verificada nas duas pastas.": [
+    "Choice applied and verified in both folders.",
+    "Elección aplicada y verificada en las dos carpetas."
+  ],
+  "Diferença da prévia: escolha uma versão antes ou depois de iniciar.": [
+    "Preview difference: choose a version before or after starting.",
+    "Diferencia en la vista previa: elige una versión antes o después de iniciar."
+  ],
+  "Nenhuma atividade nesta sessão": [
+    "No activity in this session",
+    "Sin actividad en esta sesión"
+  ],
+  "Verificações, cópias e avisos aparecerão aqui.": [
+    "Checks, copies and warnings will appear here.",
+    "Las comprobaciones, copias y avisos aparecerán aquí."
+  ],
+  "Hora": [
+    "Time",
+    "Hora"
+  ],
+  "Estado": [
+    "Status",
+    "Estado"
+  ],
+  "Execução": [
+    "Activity",
+    "Actividad"
+  ],
+  "Abrir logs": [
+    "Open logs",
+    "Abrir registros"
+  ],
+  "Abrir com o Windows": [
+    "Start with Windows",
+    "Iniciar con Windows"
+  ],
+  "Incluir layouts do Obsidian (workspace*.json)": [
+    "Include Obsidian layouts (workspace*.json)",
+    "Incluir diseños de Obsidian (workspace*.json)"
+  ],
+  "Desativado por padrão: layouts são específicos de cada dispositivo e mudam constantemente.": [
+    "Off by default: layouts are device-specific and change frequently.",
+    "Desactivado por defecto: los diseños son propios de cada dispositivo y cambian con frecuencia."
+  ],
+  "Layouts = abas, painéis e barras laterais (workspace*.json). Notas, temas, plugins e demais configurações continuam incluídos. Pare o monitor para mudar esta opção e inicie novamente.": [
+    "Layouts = tabs, panes and sidebars (workspace*.json). Notes, themes, plugins and other settings remain included. Stop the monitor to change this option, then start it again.",
+    "Diseños = pestañas, paneles y barras laterales (workspace*.json). Las notas, temas, plugins y demás ajustes siguen incluidos. Detén el monitor para cambiar esta opción y vuelve a iniciarlo."
+  ],
+  "Backup é uma cópia avulsa para recuperação antes de alterações. É opcional: o monitor inicia e funciona sem ele.": [
+    "A backup is a standalone recovery copy before changes. It is optional: the monitor can start and run without it.",
+    "Una copia de seguridad es una copia independiente para recuperar datos antes de cambios. Es opcional: el monitor puede iniciarse y funcionar sin ella."
+  ],
+  "Criar backup opcional": [
+    "Create optional backup",
+    "Crear copia de seguridad opcional"
+  ],
+  "Abrir dados e backups": [
+    "Open data and backups",
+    "Abrir datos y copias de seguridad"
+  ],
+  "Revisar referências Obsidian / Codex": [
+    "Review Obsidian / Codex references",
+    "Revisar referencias de Obsidian / Codex"
+  ],
+  "Pare o monitor para criar uma cópia avulsa. Isso não é necessário para sincronizar.": [
+    "Stop the monitor to create a standalone backup. This is not required for synchronization.",
+    "Detén el monitor para crear una copia independiente. No es necesario para sincronizar."
+  ],
+  "Backup avulso concluído. Para sincronizar, clique em Iniciar sincronização.": [
+    "Standalone backup completed. Click Start synchronization to synchronize.",
+    "Copia independiente completada. Pulsa Iniciar sincronización para sincronizar."
+  ],
+  "Backup: {0}": [
+    "Backup: {0}",
+    "Copia de seguridad: {0}"
+  ],
+  "Comparar conflito · {0}": [
+    "Compare conflict · {0}",
+    "Comparar conflicto · {0}"
+  ],
+  "Usar local": [
+    "Use local",
+    "Usar local"
+  ],
+  "Usar iCloud": [
+    "Use iCloud",
+    "Usar iCloud"
+  ],
+  "Salvar combinação": [
+    "Save merged version",
+    "Guardar combinación"
+  ],
+  "Decidir depois": [
+    "Decide later",
+    "Decidir después"
+  ],
+  "Versões preservadas": [
+    "Preserved versions",
+    "Versiones conservadas"
+  ],
+  "Diferenças": [
+    "Differences",
+    "Diferencias"
+  ],
+  "Pré-visualização Markdown": [
+    "Markdown preview",
+    "Vista previa de Markdown"
+  ],
+  "Combinar manualmente": [
+    "Merge manually",
+    "Combinar manualmente"
+  ],
+  "LOCAL": [
+    "LOCAL",
+    "LOCAL"
+  ],
+  "ICLOUD": [
+    "ICLOUD",
+    "ICLOUD"
+  ],
+  "MAIS RECENTE": [
+    "LATEST",
+    "MÁS RECIENTE"
+  ],
+  "excluído": [
+    "deleted",
+    "eliminado"
+  ],
+  "Este PC: {0}. A autoria da versão recebida pelo iCloud pode não estar disponível.": [
+    "This PC: {0}. Authorship of the version received through iCloud may be unavailable.",
+    "Este PC: {0}. Puede que la autoría de la versión recibida por iCloud no esté disponible."
+  ],
+  "Confirmar alteração": [
+    "Confirm change",
+    "Confirmar cambio"
+  ],
+  "Aplicar escolha": [
+    "Apply choice",
+    "Aplicar elección"
+  ],
+  "Cancelar": [
+    "Cancel",
+    "Cancelar"
+  ],
+  "Entendi": [
+    "OK",
+    "Entendido"
+  ],
+  "Aplicar esta escolha às duas pastas? O conteúdo será revalidado antes da alteração.": [
+    "Apply this choice to both folders? The content will be revalidated before the change.",
+    "¿Aplicar esta elección a las dos carpetas? El contenido se volverá a validar antes del cambio."
+  ],
+  "Instalar · {0}": [
+    "Install · {0}",
+    "Instalar · {0}"
+  ],
+  "Local primeiro. Sincronização visível.": [
+    "Local first. Visible synchronization.",
+    "Primero local. Sincronización visible."
+  ],
+  "Instalação para este usuário, sem administrador. O aplicativo inclui seu runtime e permite escolher as pastas no primeiro uso.": [
+    "Installs for this user without administrator access. The app includes its runtime and lets you choose the folders on first use.",
+    "Se instala para este usuario sin acceso de administrador. La aplicación incluye su entorno de ejecución y permite elegir las carpetas en el primer uso."
+  ],
+  "Destino: {0}": [
+    "Destination: {0}",
+    "Destino: {0}"
+  ],
+  "Iniciar com o Windows": [
+    "Start with Windows",
+    "Iniciar con Windows"
+  ],
+  "O aplicativo não é afiliado à Obsidian ou à Apple. A instalação não migra seus arquivos automaticamente.": [
+    "The app is not affiliated with Obsidian or Apple. Installation does not migrate your files automatically.",
+    "La aplicación no está afiliada con Obsidian ni Apple. La instalación no migra tus archivos automáticamente."
+  ],
+  "Instalar e abrir": [
+    "Install and open",
+    "Instalar y abrir"
+  ],
+  "Revisar integração · {0}": [
+    "Review integration · {0}",
+    "Revisar integración · {0}"
+  ],
+  "Referências externas · revisão antes de aplicar": [
+    "External references · review before applying",
+    "Referencias externas · revisar antes de aplicar"
+  ],
+  "Aplicar alterações revisadas": [
+    "Apply reviewed changes",
+    "Aplicar cambios revisados"
+  ],
+  "Feche o Obsidian antes de atualizar suas referências.": [
+    "Close Obsidian before updating its references.",
+    "Cierra Obsidian antes de actualizar sus referencias."
+  ],
+  "Verifique as pastas antes de revisar as referências externas.": [
+    "Check the folders before reviewing external references.",
+    "Comprueba las carpetas antes de revisar las referencias externas."
+  ],
+  "Nenhuma referência externa correspondente foi encontrada.": [
+    "No matching external references found.",
+    "No se encontraron referencias externas coincidentes."
+  ],
+  "Aprovação necessária: estes arquivos pertencem a outros aplicativos.": [
+    "Approval required: these files belong to other applications.",
+    "Se requiere aprobación: estos archivos pertenecen a otras aplicaciones."
+  ],
+  "Feche o Obsidian e reinicie o Codex após a atualização. Hooks alterados podem exigir revisão humana no Codex; este aplicativo não altera confiança.": [
+    "Close Obsidian and restart Codex after updating. Changed hooks may require human review in Codex; this app does not change trust settings.",
+    "Cierra Obsidian y reinicia Codex tras actualizar. Los hooks modificados pueden requerir revisión humana en Codex; esta aplicación no cambia la confianza."
+  ],
+  "Origem: {0}": [
+    "Source: {0}",
+    "Origen: {0}"
+  ],
+  "Nova referência: {0}": [
+    "New reference: {0}",
+    "Nueva referencia: {0}"
+  ],
+  "ARQUIVO": [
+    "FILE",
+    "ARCHIVO"
+  ],
+  "JUNÇÃO": [
+    "JUNCTION",
+    "UNIÓN"
+  ],
+  "Os vínculos relativos dentro do vault serão preservados. Referências em documentos históricos não serão reescritas. Aplicativos com caminhos abertos devem ser reabertos na pasta local.": [
+    "Relative links inside the vault will be preserved. References in historical documents will not be rewritten. Reopen applications in the local folder.",
+    "Se conservarán los enlaces relativos dentro de la bóveda. No se reescribirán referencias en documentos históricos. Vuelve a abrir las aplicaciones en la carpeta local."
+  ],
+  "Aplicar as alterações exibidas? Os arquivos anteriores serão guardados em um backup local. Reinicie o Codex e revise seus hooks depois.": [
+    "Apply the displayed changes? Previous files will be saved in a local backup. Restart Codex and review its hooks afterwards.",
+    "¿Aplicar los cambios mostrados? Los archivos anteriores se guardarán en una copia local. Reinicia Codex y revisa sus hooks después."
+  ],
+  "O aplicativo já está em execução. Abra pelo ícone na bandeja.": [
+    "The app is already running. Open it from the tray icon.",
+    "La aplicación ya está en ejecución. Ábrela desde el icono de la bandeja."
+  ],
+  "Não foi possível reabrir a janela existente. Encerre o Vault Sync pelo Gerenciador de Tarefas e tente novamente.": [
+    "Could not reopen the existing window. Close Vault Sync in Task Manager and try again.",
+    "No se pudo volver a abrir la ventana existente. Cierra Vault Sync desde el Administrador de tareas e inténtalo de nuevo."
+  ],
+  "Feche o aplicativo pelo ícone da bandeja antes de desinstalar.": [
+    "Close the app from the tray icon before uninstalling.",
+    "Cierra la aplicación desde el icono de la bandeja antes de desinstalar."
+  ],
+  "Desinstalar {0}?": [
+    "Uninstall {0}?",
+    "¿Desinstalar {0}?"
+  ],
+  "Conflitos preservados: {0}": [
+    "Preserved conflicts: {0}",
+    "Conflictos conservados: {0}"
+  ],
+  "Pendências registradas: {0}": [
+    "Recorded pending items: {0}",
+    "Pendientes registrados: {0}"
+  ],
+  "Os vaults, backups e estado local serão preservados em:": [
+    "Vaults, backups and local state will be preserved at:",
+    "Las bóvedas, copias de seguridad y el estado local se conservarán en:"
+  ],
+  "Primeira conferência em andamento. O monitor continuará ativo.": [
+    "Initial check in progress. The monitor will remain active.",
+    "Primera comprobación en curso. El monitor seguirá activo."
+  ],
+  "Nenhum arquivo será copiado. Clique em Iniciar sincronização para retomar.": [
+    "No files will be copied. Click Start synchronization to resume.",
+    "No se copiará ningún archivo. Pulsa Iniciar sincronización para reanudar."
+  ],
+  "Lendo arquivos para mostrar a prévia…": [
+    "Reading files to show the preview…",
+    "Leyendo archivos para mostrar la vista previa…"
+  ],
+  "Clique em Iniciar sincronização para copiar e monitorar automaticamente.": [
+    "Click Start synchronization to copy and monitor automatically.",
+    "Pulsa Iniciar sincronización para copiar y supervisar automáticamente."
+  ],
+  "Uma das pastas não está acessível. Corrija e tente iniciar novamente.": [
+    "A folder is inaccessible. Fix it and try starting again.",
+    "Una carpeta no está accesible. Corrígelo e intenta iniciar de nuevo."
+  ],
+  "Uma operação está em andamento. Aguarde a conclusão indicada no log.": [
+    "An operation is running. Wait for completion in the log.",
+    "Hay una operación en curso. Espera a que el registro indique su finalización."
+  ],
+  "Nova regra: vence a data de modificação mais recente. Revise a prévia e clique em Iniciar sincronização para ativá-la.": [
+    "New rule: the latest modification wins. Review the preview and click Start synchronization to enable it.",
+    "Nueva regla: prevalece la modificación más reciente. Revisa la vista previa y pulsa Iniciar sincronización para activarla."
+  ],
+  "Cancelando a operação para fechar…": [
+    "Canceling the operation before closing…",
+    "Cancelando la operación antes de cerrar…"
+  ],
+  "Janela recolhida. O estado do monitor aparece no ícone da bandeja.": [
+    "Window hidden. The tray icon shows the monitor status.",
+    "Ventana oculta. El icono de la bandeja muestra el estado del monitor."
+  ],
+  "Aplicativo aberto. Monitor PARADO: configure as pastas e clique em Iniciar sincronização.": [
+    "App opened. Monitor STOPPED: configure the folders and click Start synchronization.",
+    "Aplicación abierta. Monitor DETENIDO: configura las carpetas y pulsa Iniciar sincronización."
+  ],
+  "Configuração carregada. Monitor PARADO até clicar em Iniciar sincronização.": [
+    "Configuration loaded. Monitor STOPPED until you click Start synchronization.",
+    "Configuración cargada. Monitor DETENIDO hasta pulsar Iniciar sincronización."
+  ],
+  "Verificação das pastas iniciada.": [
+    "Folder check started.",
+    "Comprobación de carpetas iniciada."
+  ],
+  "Operação cancelada.": [
+    "Operation canceled.",
+    "Operación cancelada."
+  ],
+  "Pasta criada: {0}": [
+    "Folder created: {0}",
+    "Carpeta creada: {0}"
+  ],
+  "Pasta aberta: {0}": [
+    "Folder opened: {0}",
+    "Carpeta abierta: {0}"
+  ],
+  "A pasta ainda não existe: {0}": [
+    "The folder does not exist yet: {0}",
+    "La carpeta aún no existe: {0}"
+  ],
+  "As pastas devem ser diferentes e não podem estar uma dentro da outra.": [
+    "Folders must be different and cannot be nested inside each other.",
+    "Las carpetas deben ser diferentes y no pueden estar una dentro de la otra."
+  ],
+  "As pastas de dados não podem se sobrepor ao estado do aplicativo.": [
+    "Data folders cannot overlap the application state.",
+    "Las carpetas de datos no pueden solaparse con el estado de la aplicación."
+  ],
+  "Selecione uma pasta em disco local, não uma unidade inteira ou endereço de rede.": [
+    "Select a local disk folder, not an entire drive or network address.",
+    "Selecciona una carpeta en un disco local, no una unidad completa ni una dirección de red."
+  ],
+  "Caminho relativo inválido.": [
+    "Invalid relative path.",
+    "Ruta relativa no válida."
+  ],
+  "Caminho fora da raiz.": [
+    "Path outside the root.",
+    "Ruta fuera de la raíz."
+  ],
+  "Link/junção não percorrido: {0}": [
+    "Link/junction not traversed: {0}",
+    "Enlace/unión no recorrido: {0}"
+  ],
+  "Monitorando": [
+    "Monitoring",
+    "Monitorizando"
+  ],
+  "Iniciando": [
+    "Starting",
+    "Iniciando"
+  ],
+  "Pausado": [
+    "Paused",
+    "Pausado"
+  ],
+  "Monitor pausado": [
+    "Monitor paused",
+    "Monitor pausado"
+  ],
+  "Conferindo": [
+    "Checking",
+    "Comprobando"
+  ],
+  "Aguardando acesso": [
+    "Waiting for access",
+    "Esperando acceso"
+  ],
+  "Aguardando primeira conferência": [
+    "Waiting for the initial check",
+    "Esperando la primera comprobación"
+  ],
+  "Monitor iniciado. Observando alterações Local ↔ iCloud.": [
+    "Monitor started. Watching Local ↔ iCloud changes.",
+    "Monitor iniciado. Observando cambios Local ↔ iCloud."
+  ],
+  "Monitor perdeu eventos; conferência completa solicitada.": [
+    "The monitor missed events; a full check was requested.",
+    "El monitor perdió eventos; se solicitó una comprobación completa."
+  ],
+  "Monitor pausado pelo usuário.": [
+    "Monitor paused by the user.",
+    "Monitor pausado por el usuario."
+  ],
+  "Monitor retomado pelo usuário.": [
+    "Monitor resumed by the user.",
+    "Monitor reanudado por el usuario."
+  ],
+  "Conferência manual solicitada.": [
+    "Manual check requested.",
+    "Comprobación manual solicitada."
+  ],
+  "O monitor está pausado. Nenhuma alteração será copiada.": [
+    "The monitor is paused. No changes will be copied.",
+    "El monitor está pausado. No se copiará ningún cambio."
+  ],
+  "Conferindo arquivos; o monitor está ativo.": [
+    "Checking files; the monitor is active.",
+    "Comprobando archivos; el monitor está activo."
+  ],
+  "Conferência completa iniciada.": [
+    "Full check started.",
+    "Comprobación completa iniciada."
+  ],
+  "Conferência concluída: {0} arquivos; {1} leituras adiadas.": [
+    "Check completed: {0} files; {1} deferred reads.",
+    "Comprobación completada: {0} archivos; {1} lecturas aplazadas."
+  ],
+  "Ativo · aguardando alterações nas duas pastas.": [
+    "Active · waiting for changes in both folders.",
+    "Activo · esperando cambios en las dos carpetas."
+  ],
+  "Monitor ativo, nova tentativa automática: {0}": [
+    "Monitor active, automatic retry: {0}",
+    "Monitor activo, nuevo intento automático: {0}"
+  ],
+  "Conflito resolvido e verificado.": [
+    "Conflict resolved and verified.",
+    "Conflicto resuelto y verificado."
+  ],
+  "Monitor parado. Nenhum arquivo será sincronizado até iniciar novamente.": [
+    "Monitor stopped. No files will be synchronized until it starts again.",
+    "Monitor detenido. No se sincronizarán archivos hasta volver a iniciarlo."
+  ],
+  "Raiz indisponível; cópia de segurança adiada.": [
+    "Root unavailable; backup deferred.",
+    "Raíz no disponible; copia de seguridad aplazada."
+  ],
+  "Raiz indisponível; nada será excluído: {0}": [
+    "Root unavailable; nothing will be deleted: {0}",
+    "Raíz no disponible; no se eliminará nada: {0}"
+  ],
+  "Raiz ainda não disponível localmente: {0}": [
+    "Root not yet available locally: {0}",
+    "Raíz aún no disponible localmente: {0}"
+  ],
+  "Raiz indisponível: {0}": [
+    "Root unavailable: {0}",
+    "Raíz no disponible: {0}"
+  ],
+  "Baixe e mantenha neste dispositivo: {0}": [
+    "Download and keep on this device: {0}",
+    "Descarga y mantén en este dispositivo: {0}"
+  ],
+  "Uma pasta ocupa o lugar de um arquivo: {0}": [
+    "A folder occupies a file path: {0}",
+    "Una carpeta ocupa la ruta de un archivo: {0}"
+  ],
+  "Arquivo mudou durante a leitura: {0}": [
+    "File changed while being read: {0}",
+    "El archivo cambió durante la lectura: {0}"
+  ],
+  "Arquivo mudou desde a comparação; será conferido novamente: {0}": [
+    "File changed since comparison; it will be checked again: {0}",
+    "El archivo cambió desde la comparación; se comprobará de nuevo: {0}"
+  ],
+  "Verificação da cópia falhou: {0}": [
+    "Copy verification failed: {0}",
+    "Falló la verificación de la copia: {0}"
+  ],
+  "O arquivo mudou durante a conferência. Tente abrir novamente.": [
+    "The file changed during the check. Try opening it again.",
+    "El archivo cambió durante la comprobación. Intenta abrirlo de nuevo."
+  ],
+  "O arquivo mudou enquanto a comparação era preparada. Tente abrir novamente.": [
+    "The file changed while preparing the comparison. Try opening it again.",
+    "El archivo cambió al preparar la comparación. Intenta abrirlo de nuevo."
+  ],
+  "As versões mudaram. Reabra o conflito para comparar novamente.": [
+    "The versions changed. Reopen the conflict to compare again.",
+    "Las versiones cambiaron. Vuelve a abrir el conflicto para comparar de nuevo."
+  ],
+  "Combinação disponível apenas para Markdown.": [
+    "Merging is available only for Markdown.",
+    "La combinación solo está disponible para Markdown."
+  ],
+  "Nova alteração durante resolução; conflito continua preservado.": [
+    "New change during resolution; the conflict remains preserved.",
+    "Nuevo cambio durante la resolución; el conflicto sigue conservado."
+  ],
+  "Exclusão contra edição ou conteúdo não registrado": [
+    "Deletion versus editing or untracked content",
+    "Eliminación frente a edición o contenido no registrado"
+  ],
+  "Datas de modificação iguais com conteúdos diferentes": [
+    "Matching modification dates with different content",
+    "Fechas de modificación iguales con contenido diferente"
+  ],
+  "Cópia para iCloud verificada": [
+    "Copy to iCloud verified",
+    "Copia a iCloud verificada"
+  ],
+  "Cópia para local verificada": [
+    "Copy to local verified",
+    "Copia local verificada"
+  ],
+  "BLOQUEIO": [
+    "BLOCKED",
+    "BLOQUEO"
+  ],
+  "Prévia isolada de referências externas.": [
+    "Isolated preview of external references.",
+    "Vista previa aislada de referencias externas."
+  ],
+  "Nenhum arquivo externo foi lido ou alterado nesta demonstração.": [
+    "No external files were read or changed in this demonstration.",
+    "No se leyó ni modificó ningún archivo externo en esta demostración."
+  ],
+  "RECUPERAÇÃO": [
+    "RECOVERY",
+    "RECUPERACIÓN"
+  ],
+  "Cópia de segurança opcional iniciada.": [
+    "Optional backup started.",
+    "Copia de seguridad opcional iniciada."
+  ],
+  "Backup adiou arquivo em uso: {0}": [
+    "Backup deferred a busy file: {0}",
+    "La copia de seguridad aplazó un archivo en uso: {0}"
+  ],
+  "Backup concluído: {0} cópias verificadas; {1} arquivos/leituras adiados. Consulte manifest.json.": [
+    "Backup completed: {0} verified copies; {1} files/reads deferred. See manifest.json.",
+    "Copia de seguridad completada: {0} copias verificadas; {1} archivos/lecturas aplazados. Consulta manifest.json."
+  ],
+  "Arquivo/subpasta adiado; os demais continuam. {0}": [
+    "File/subfolder deferred; the others continue. {0}",
+    "Archivo/subcarpeta aplazado; los demás continúan. {0}"
+  ],
+  "Nova tentativa automática: {0}": [
+    "Automatic retry: {0}",
+    "Nuevo intento automático: {0}"
+  ],
+  "Conteúdo atual idêntico. Versões de recuperação preservadas em: {0}": [
+    "Current content is identical. Recovery versions preserved at: {0}",
+    "El contenido actual es idéntico. Versiones de recuperación conservadas en: {0}"
+  ],
+  "Sincronizado: os dois lados têm conteúdo idêntico; conflito encerrado.": [
+    "Synchronized: both sides have identical content; conflict cleared.",
+    "Sincronizado: ambos lados tienen contenido idéntico; conflicto cerrado."
+  ],
+  "Igualdade será conferida novamente: {0}": [
+    "Equality will be checked again: {0}",
+    "Se volverá a comprobar la igualdad: {0}"
+  ],
+  "Conferência do conflito adiada: {0}": [
+    "Conflict check deferred: {0}",
+    "Comprobación del conflicto aplazada: {0}"
+  ],
+  "Datas iguais com conteúdos diferentes, ou exclusão contra edição": [
+    "Tied dates with different content, or deletion versus editing",
+    "Fechas iguales con contenido diferente, o eliminación frente a edición"
+  ],
+  "Edições concorrentes ou divergência inicial": [
+    "Concurrent edits or initial differences",
+    "Ediciones simultáneas o diferencias iniciales"
+  ],
+  "Alteração concorrente durante a operação": [
+    "Concurrent change during the operation",
+    "Cambio simultáneo durante la operación"
+  ],
+  "Copiado Local → iCloud": [
+    "Copied Local → iCloud",
+    "Copiado Local → iCloud"
+  ],
+  "Copiado iCloud → Local": [
+    "Copied iCloud → Local",
+    "Copiado iCloud → Local"
+  ],
+  "Exclusão aplicada na pasta local": [
+    "Deletion applied in the local folder",
+    "Eliminación aplicada en la carpeta local"
+  ],
+  "Exclusão aplicada na pasta iCloud": [
+    "Deletion applied in the iCloud folder",
+    "Eliminación aplicada en la carpeta iCloud"
+  ],
+  "Conteúdo verificado": [
+    "Content verified",
+    "Contenido verificado"
+  ],
+  "Outra aplicação substituiu o arquivo durante a gravação": [
+    "Another application replaced the file while writing",
+    "Otra aplicación sustituyó el archivo durante la escritura"
+  ],
+  "Edição concorrente com exclusão": [
+    "Concurrent editing and deletion",
+    "Edición y eliminación simultáneas"
+  ],
+  "Preparação interrompida retomada sem criar conflito.": [
+    "Interrupted preparation resumed without creating a conflict.",
+    "Preparación interrumpida reanudada sin crear un conflicto."
+  ],
+  "Operação interrompida; revise as versões preservadas antes de continuar": [
+    "Operation interrupted; review the preserved versions before continuing",
+    "Operación interrumpida; revisa las versiones conservadas antes de continuar"
+  ],
+  "O arquivo mudou desde que o conflito foi aberto": [
+    "The file changed after opening the conflict",
+    "El archivo cambió desde que se abrió el conflicto"
+  ],
+  "Resolução em andamento": [
+    "Resolution in progress",
+    "Resolución en curso"
+  ],
+  "Conflito resolvido e verificado nas duas pastas.": [
+    "Conflict resolved and verified in both folders.",
+    "Conflicto resuelto y verificado en las dos carpetas."
+  ],
+  "Uma das pastas está indisponível. Nenhuma exclusão será aplicada. {0}": [
+    "A folder is unavailable. No deletions will be applied. {0}",
+    "Una carpeta no está disponible. No se aplicará ninguna eliminación. {0}"
+  ],
+  "O conteúdo mudou durante a conferência de igualdade.": [
+    "The content changed during the equality check.",
+    "El contenido cambió durante la comprobación de igualdad."
+  ],
+  "Versão concorrente preservada no conflito: {0}": [
+    "Concurrent version preserved in the conflict: {0}",
+    "Versión simultánea conservada en el conflicto: {0}"
+  ],
+  "Exclusão interrompida: versão concorrente preservada.": [
+    "Deletion interrupted: concurrent version preserved.",
+    "Eliminación interrumpida: versión simultánea conservada."
+  ],
+  "Registro de recuperação inválido.": [
+    "Invalid recovery record.",
+    "Registro de recuperación no válido."
+  ],
+  "Registro de operação fora das raízes; recuperação bloqueada.": [
+    "Operation record outside the roots; recovery blocked.",
+    "Registro de operación fuera de las raíces; recuperación bloqueada."
+  ],
+  "Temporário inválido no registro de recuperação.": [
+    "Invalid temporary file in the recovery record.",
+    "Archivo temporal no válido en el registro de recuperación."
+  ],
+  "Arquivo mudou durante a cópia: {0}": [
+    "File changed during copying: {0}",
+    "El archivo cambió durante la copia: {0}"
+  ],
+  "A cópia local ainda não contém AGENTS.md. Conclua a cópia verificada primeiro.": [
+    "The local copy does not contain AGENTS.md yet. Complete the verified copy first.",
+    "La copia local aún no contiene AGENTS.md. Completa primero la copia verificada."
+  ],
+  "Arquivo alterado após a prévia: {0}": [
+    "File changed after the preview: {0}",
+    "Archivo modificado después de la vista previa: {0}"
+  ],
+  "Edição concorrente detectada: {0}": [
+    "Concurrent edit detected: {0}",
+    "Edición simultánea detectada: {0}"
+  ],
+  "Falha na verificação: {0}": [
+    "Verification failed: {0}",
+    "Falló la verificación: {0}"
+  ],
+  "Skill local ainda ausente; junção anterior preservada.": [
+    "Local skill still missing; previous junction preserved.",
+    "La skill local aún no existe; se conserva la unión anterior."
+  ],
+  "A junção mudou desde a prévia.": [
+    "The junction changed since the preview.",
+    "La unión cambió desde la vista previa."
+  ],
+  "Junção não verificada.": [
+    "Junction not verified.",
+    "Unión no verificada."
+  ],
+  "Atualizações verificadas. Backup: {0}": [
+    "Updates verified. Backup: {0}",
+    "Actualizaciones verificadas. Copia de seguridad: {0}"
+  ],
+  "Reinicie os aplicativos e revise hooks no Codex.": [
+    "Restart the applications and review hooks in Codex.",
+    "Reinicia las aplicaciones y revisa los hooks en Codex."
+  ],
+  "Integração interrompida. Confira o relatório e os backups antes de repetir.": [
+    "Integration interrupted. Check the report and backups before retrying.",
+    "Integración interrumpida. Revisa el informe y las copias de seguridad antes de reintentar."
+  ],
+  "Não foi possível criar o atalho do menu Iniciar.": [
+    "Could not create the Start menu shortcut.",
+    "No se pudo crear el acceso directo del menú Inicio."
+  ],
+  "Feche o Vault Sync pelo ícone da bandeja antes de atualizar.": [
+    "Close Vault Sync from the tray icon before updating.",
+    "Cierra Vault Sync desde el icono de la bandeja antes de actualizar."
+  ],
+  "Instalador copiado com conteúdo divergente.": [
+    "Copied installer content did not match.",
+    "El contenido del instalador copiado no coincide."
+  ],
+  "Atualizações": [
+    "Updates",
+    "Actualizaciones"
+  ],
+  "Verificar atualizações automaticamente": [
+    "Check for updates automatically",
+    "Buscar actualizaciones automáticamente"
+  ],
+  "Ainda não verificado.": [
+    "Not checked yet.",
+    "Aún no se ha comprobado."
+  ],
+  "Versão instalada: {0}": [
+    "Installed version: {0}",
+    "Versión instalada: {0}"
+  ],
+  "Consulta ao abrir e a cada seis horas. Downloads e instalação somente após sua confirmação.": [
+    "Check at startup and every six hours. Download and installation only after your confirmation.",
+    "Comprobar al abrir y cada seis horas. Descarga e instalación solo después de su confirmación."
+  ],
+  "Verificar agora": [
+    "Check now",
+    "Comprobar ahora"
+  ],
+  "Ver atualização disponível": [
+    "View available update",
+    "Ver actualización disponible"
+  ],
+  "Cancelar download": [
+    "Cancel download",
+    "Cancelar descarga"
+  ],
+  "Avaliações e versões portáteis usam instalação manual pela página de releases.": [
+    "Evaluation and portable copies use manual installation from the releases page.",
+    "Las copias de evaluación y portátiles se instalan manualmente desde la página de versiones."
+  ],
+  "Não foi possível salvar a preferência de atualização.": [
+    "Could not save the update preference.",
+    "No se pudo guardar la preferencia de actualización."
+  ],
+  "Verificando atualizações…": [
+    "Checking for updates…",
+    "Buscando actualizaciones…"
+  ],
+  "Nova versão disponível: {0}": [
+    "New version available: {0}",
+    "Nueva versión disponible: {0}"
+  ],
+  "Você está usando a versão mais recente.": [
+    "You are using the latest version.",
+    "Está utilizando la versión más reciente."
+  ],
+  "Verificação cancelada ou sem resposta da rede.": [
+    "Check cancelled or network timed out.",
+    "Comprobación cancelada o sin respuesta de la red."
+  ],
+  "Não foi possível verificar atualizações. A sincronização continua funcionando.": [
+    "Could not check for updates. Synchronization continues normally.",
+    "No se pudieron comprobar las actualizaciones. La sincronización continúa funcionando."
+  ],
+  "Baixando atualização: {0} de {1} MB": [
+    "Downloading update: {0} of {1} MB",
+    "Descargando actualización: {0} de {1} MB"
+  ],
+  "Preparando instalação; aguardando operações em andamento…": [
+    "Preparing installation; waiting for current operations…",
+    "Preparando instalación; esperando las operaciones en curso…"
+  ],
+  "Atualização cancelada. A versão instalada foi preservada.": [
+    "Update cancelled. The installed version was preserved.",
+    "Actualización cancelada. Se conservó la versión instalada."
+  ],
+  "A atualização não foi instalada. A versão atual foi preservada.": [
+    "The update was not installed. The current version was preserved.",
+    "La actualización no se instaló. Se conservó la versión actual."
+  ],
+  "Última verificação: {0}": [
+    "Last checked: {0}",
+    "Última comprobación: {0}"
+  ],
+  "Atualização instalada e verificada.": [
+    "Update installed and verified.",
+    "Actualización instalada y verificada."
+  ],
+  "Atualização disponível · Vault Sync": [
+    "Update available · Vault Sync",
+    "Actualización disponible · Vault Sync"
+  ],
+  "Após confirmar, o aplicativo baixa, verifica e instala a atualização. A sincronização será retomada no estado anterior.": [
+    "After confirmation, the app downloads, verifies and installs the update. Synchronization resumes in its previous state.",
+    "Después de confirmar, la aplicación descarga, verifica e instala la actualización. La sincronización vuelve a su estado anterior."
+  ],
+  "Esta cópia usa instalação manual pela página de releases.": [
+    "This copy uses manual installation from the releases page.",
+    "Esta copia se instala manualmente desde la página de versiones."
+  ],
+  "Depois": [
+    "Later",
+    "Más tarde"
+  ],
+  "Atualizar agora": [
+    "Update now",
+    "Actualizar ahora"
+  ],
+  "Abrir página de releases": [
+    "Open releases page",
+    "Abrir página de versiones"
+  ],
+  "Uma atualização está em andamento. Aguarde a conclusão.": [
+    "An update is in progress. Wait for it to finish.",
+    "Hay una actualización en curso. Espere a que finalice."
+  ],
+  "ATUALIZAÇÃO": [
+    "UPDATE",
+    "ACTUALIZACIÓN"
+  ]
 }

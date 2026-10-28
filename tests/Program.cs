@@ -257,6 +257,8 @@ Test("missing root cannot clear an identical conflict", () =>
     f.Engine.RefreshConflictRecords(); Assert(f.Engine.Store.Conflicts().Count == 1);
 });
 
+UpdateTests.Run(Test);
+
 string reportPath = args.FirstOrDefault() ?? Path.Combine(root, "results.json");
 Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(reportPath))!);
 File.WriteAllText(reportPath, JsonSerializer.Serialize(new { passed, failed, fixtures = root, results }, new JsonSerializerOptions { WriteIndented = true }));

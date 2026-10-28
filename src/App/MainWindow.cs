@@ -15,7 +15,7 @@ using Forms = System.Windows.Forms;
 
 namespace VaultSync.App;
 
-internal sealed class MainWindow : Window
+internal sealed partial class MainWindow : Window
 {
     private readonly TextBox local = new(), cloud = new();
     private readonly TextBlock stateLabel = Ui.Text("PARADO", 19, Ui.Accent), detail = Ui.Text("Escolha as pastas e clique em Iniciar sincronização.", 12, Ui.Muted);
@@ -62,6 +62,7 @@ internal sealed class MainWindow : Window
         Title = Program.Product; Width = 1100; Height = 780; MinWidth = 710; MinHeight = 520; Ui.Style(this); detail.Tag = "UserContent";
         tabs.Style = (Style)FindResource("Navigation");
         var root = new DockPanel(); Ui.Chrome(this, root, "Vault Sync", "Para seus vaults do Obsidian · " + Program.Version + (evaluationMode ? " · Avaliação isolada" : ""), async () => await Exit());
+        var updateBanner = BuildUpdateBanner(); DockPanel.SetDock(updateBanner, Dock.Top); root.Children.Add(updateBanner);
         var state = new Border { Background = Ui.Surface, CornerRadius = new CornerRadius(7), Padding = new Thickness(12), Margin = new Thickness(0, 0, 0, 6) };
         var statePanel = new StackPanel(); state.Child = statePanel; statePanel.Children.Add(Ui.Row(stateSymbol, stateLabel)); statePanel.Children.Add(detail); counts.Margin = new Thickness(0, 3, 20, 3); statePanel.Children.Add(Ui.Row(counts, heartbeat));
         AutomationProperties.SetLiveSetting(statePanel, AutomationLiveSetting.Polite);
@@ -116,6 +117,7 @@ internal sealed class MainWindow : Window
         var syncOptions = new StackPanel(); syncOptions.Children.Add(Ui.Text("Sincronização", 18)); syncOptions.Children.Add(startup); syncOptions.Children.Add(layouts);
         syncOptions.Children.Add(Ui.Text("Layouts = abas, painéis e barras laterais (workspace*.json). Notas, temas, plugins e demais configurações continuam incluídos. Pare o monitor para mudar esta opção e inicie novamente.", 11, Ui.Muted));
         syncOptions.Children.Add(Ui.Button("Revisar referências Obsidian / Codex", (_, _) => ReviewIntegration())); options.Children.Add(OptionGroup(syncOptions));
+        options.Children.Add(OptionGroup(BuildUpdatePanel(evaluationMode)));
         tabs.Items.Add(Page("⚙ Configurações", new ScrollViewer { Content = options, VerticalScrollBarVisibility = ScrollBarVisibility.Auto }));
         local.Text = evaluationMode ? "" : testMode ? @"C:\Users\demo\Documents\MegaBrain" : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MegaBrain");
         cloud.Text = evaluationMode ? "" : testMode ? @"C:\Users\demo\iCloudDrive\iCloud~md~obsidian\MegaBrain" : FindCloud();
@@ -125,6 +127,7 @@ internal sealed class MainWindow : Window
         menu.Items.Add("Parar", null, (_, _) => Dispatcher.BeginInvoke(async () => await RunJob(StopMonitoring)));
         menu.Items.Add("Conferir agora", null, (_, _) => worker?.RequestScan()); menu.Items.Add("Sair", null, (_, _) => Dispatcher.BeginInvoke(async () => await Exit())); tray.ContextMenuStrip = menu;
         tray.DoubleClick += (_, _) => Dispatcher.BeginInvoke(Reveal);
+        tray.BalloonTipClicked += (_, _) => Dispatcher.BeginInvoke(() => { Reveal(); ShowUpdateOffer(); });
         SourceInitialized += (_, _) => HwndSource.FromHwnd(new WindowInteropHelper(this).Handle)?.AddHook(WindowMessage);
         Closing += (_, e) => { if (!closed) { e.Cancel = true; _ = Exit(); } };
         if (!testMode) Loaded += (_, _) => LoadSavedConfiguration();
@@ -220,7 +223,8 @@ internal sealed class MainWindow : Window
         {
             var config = AppFiles.LoadConfig(dataRoot); if (config == null) { log.Write("INFO", "Aplicativo aberto. Monitor PARADO: configure as pastas e clique em Iniciar sincronização."); return; }
             local.Text = config.LocalRoot; cloud.Text = config.CloudRoot; startup.IsChecked = config.StartWithWindows; layouts.IsChecked = config.IncludeWorkspaceLayouts;
-            if (config.CanAutoStart) _ = RunJob(async () => { BeginWorker(new(config, dataRoot), config); await Task.CompletedTask; });
+            if (resumeState == VaultSync.Updates.ResumeState.Stopped) { resumeState = null; log.Write("INFO", "Configuração carregada. Monitor PARADO até clicar em Iniciar sincronização."); }
+            else if (config.CanAutoStart) _ = RunJob(async () => { BeginWorker(new(config, dataRoot), config); await Task.CompletedTask; });
             else if (config.MonitorOnLaunch) { SetDetail("Nova regra: vence a data de modificação mais recente. Revise a prévia e clique em Iniciar sincronização para ativá-la."); log.Write("AVISO", detailMessage); }
             else log.Write("INFO", "Configuração carregada. Monitor PARADO até clicar em Iniciar sincronização.");
         }
@@ -234,6 +238,7 @@ internal sealed class MainWindow : Window
     private static void RequirePath(string path) { if (string.IsNullOrWhiteSpace(path)) throw new IOException("Escolha uma pasta antes de criar ou abrir."); }
     private async Task RunJob(Func<Task> action)
     {
+        if (updateInstalling) return;
         if (closed) return; if (busy) { comparisonStatus.Text = "Uma operação está em andamento. Aguarde a conclusão indicada no log."; return; } busy = true; operation = new(); UpdateButtons();
         try { await action(); }
         catch (OperationCanceledException) { log.Write("INFO", "Operação cancelada."); }
@@ -281,8 +286,13 @@ internal sealed class MainWindow : Window
     }
     private void BeginWorker(SyncEngine engine, SyncConfig config)
     {
-        activeConfig = config; worker = new(engine, log); worker.Status += s => { if (!closed) Dispatcher.BeginInvoke(() => Update(s)); }; worker.Start();
-        stateLabel.Text = "ATIVO · INICIANDO"; SetState("↻", "Accent", "active"); SetDetail("Primeira conferência em andamento. O monitor continuará ativo."); UpdateButtons();
+        activeConfig = config; worker = new(engine, log); worker.Status += s => { if (!closed) Dispatcher.BeginInvoke(() => Update(s)); };
+        if (resumeState == VaultSync.Updates.ResumeState.Paused) worker.Pause(true);
+        resumeState = null;
+        worker.Start();
+        if (worker.Paused) { stateLabel.Text = "PAUSADO"; SetState("Ⅱ", "Warning", "paused"); SetDetail("O monitor está pausado. Nenhuma alteração será copiada."); }
+        else { stateLabel.Text = "ATIVO · INICIANDO"; SetState("↻", "Accent", "active"); SetDetail("Primeira conferência em andamento. O monitor continuará ativo."); }
+        UpdateButtons();
     }
     private async Task StopMonitoring()
     {
@@ -392,6 +402,7 @@ internal sealed class MainWindow : Window
     }
     private void UpdateButtons()
     {
+        tabs.IsEnabled = !updateInstalling;
         start.Visibility = worker == null ? Visibility.Visible : Visibility.Collapsed;
         pause.Visibility = worker == null ? Visibility.Collapsed : Visibility.Visible;
         monitorActions.Visibility = tabs.SelectedIndex == 0 ? Visibility.Visible : Visibility.Collapsed;
@@ -399,12 +410,14 @@ internal sealed class MainWindow : Window
         start.IsEnabled = !busy && worker == null; stopButton.IsEnabled = !busy && worker != null; pause.IsEnabled = !busy && worker != null; check.IsEnabled = !busy && worker != null;
         compare.IsEnabled = refresh.IsEnabled = !busy; foreach (var button in folderButtons) button.IsEnabled = !busy && worker == null;
         local.IsReadOnly = cloud.IsReadOnly = worker != null || busy; startup.IsEnabled = layouts.IsEnabled = !busy && worker == null;
+        if (updateInstalling) { start.IsEnabled = stopButton.IsEnabled = pause.IsEnabled = check.IsEnabled = compare.IsEnabled = refresh.IsEnabled = conflictStop.IsEnabled = false; foreach (var button in folderButtons) button.IsEnabled = false; }
     }
     private static string Label(SyncAction action) => action switch { SyncAction.Upload => "Local → iCloud", SyncAction.Download => "iCloud → Local", SyncAction.DeleteLocal => "Excluir local", SyncAction.DeleteCloud => "Excluir iCloud", SyncAction.Conflict => "Escolher versão", _ => "Igual" };
     private void PowerChanged(object? sender, PowerModeChangedEventArgs e) { if (e.Mode == PowerModes.Resume) worker?.RequestScan(); }
     private async Task Exit()
     {
         if (closed) return;
+        StopUpdateChecks();
         if (busy) { exiting = true; operation?.Cancel(); SetDetail("Cancelando a operação para fechar…"); return; }
         closed = true; SystemEvents.PowerModeChanged -= PowerChanged; Theme.Changed -= ThemeChanged; Strings.Changed -= LanguageChanged; tray.Visible = false; tray.Dispose(); trayIcon?.Dispose();
         if (worker != null) { var current = worker; worker = null; await Task.Run(current.Dispose); }

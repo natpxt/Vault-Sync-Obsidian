@@ -20,6 +20,12 @@ internal static class Installer
     private static string MutexName => testPaths?.Mutex ?? "Local\\VaultSync-" + Environment.UserName;
     public static bool IsInstalledExecutable => Paths.Normalize(Environment.ProcessPath!).Equals(Paths.Normalize(InstalledExe), StringComparison.OrdinalIgnoreCase);
     private static string Shortcut => testPaths == null ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), Program.Product + ".lnk") : Path.Combine(testPaths.Root, "VaultSync-test.lnk");
+    internal static string RegistryPath => UninstallKey;
+    internal static string StartupPath => StartupKey;
+    internal static string ShortcutPath => Shortcut;
+    internal static string InstanceMutex => MutexName;
+    internal static void UseUpdateSandbox(string root, string id) => testPaths = new(root, @"Software\VaultSync\UpdaterTests\" + id, "Local\\VaultSync-Test-Update-" + id);
+    internal static void ClearUpdateSandbox() => testPaths = null;
     public static void Install(bool startup, bool launch)
     {
         using var running = new Mutex(false, MutexName);

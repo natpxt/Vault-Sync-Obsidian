@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0 — 2026-10-28
+
+- Consulta de releases estáveis ao abrir e a cada seis horas; opção automática e verificação manual em Configurações.
+- Aviso na janela/bandeja, novidades e confirmação antes de baixar; adiamento por versão durante a sessão.
+- Cliente HTTP isolado do sincronizador, cache/ETag, limites da API, HTTPS e rejeição de origens externas.
+- Download cancelável, tamanho/hash/digest/versão conferidos antes de executar.
+- Auxiliar com protocolo de repasse, encerramento seguro, bloqueio de concorrência, backup e restauração de instalação/metadados.
+- Retomada como ativo, pausado ou parado, sem alterar configuração, banco, conflitos, backups, idioma ou tema.
+- Avaliações/portáteis sem instalação automática. Recursos novos nos três idiomas e temas existentes.
+- Testes com HTTP simulado, processos reais em sandboxes e pacote secundário de teste fora de `dist/`.
+
 ## 1.0.0 — 2026-10-15
 
 - Primeiro lançamento principal, autorizado após o teste manual do usuário.

@@ -25,6 +25,17 @@ if ($Publish) {
     if ($LASTEXITCODE -ne 0) { throw 'Falha ao publicar' }
     $installationCheck = Start-Process -FilePath (Join-Path $publishRoot 'VaultSync.exe') -ArgumentList @('--test-installation', ('"' + (Join-Path $buildRoot 'installation-test.json') + '"')) -WindowStyle Hidden -Wait -PassThru
     if ($installationCheck.ExitCode -ne 0) { throw 'Falha na verificação isolada do instalador' }
+    if (-not $SkipUi) {
+        [xml]$updaterProject = Get-Content -LiteralPath (Join-Path $projectRoot 'src/App/VaultSync.App.csproj') -Raw
+        $versionText = $updaterProject.Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+        $baseVersion = [version]($versionText.Split('-')[0])
+        $fixtureVersion = "$($baseVersion.Major).$($baseVersion.Minor).$($baseVersion.Build + 1)"
+        $fixtureRoot = Join-Path $buildRoot 'update-fixture-candidate'
+        & $Dotnet publish (Join-Path $projectRoot 'src/App/VaultSync.App.csproj') "-p:VaultSyncBuildRoot=$($buildRoot.Replace('\','/'))/update-fixture-build" "-p:Version=$fixtureVersion" -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=false -p:DebugType=None -o $fixtureRoot --nologo
+        if ($LASTEXITCODE -ne 0) { throw 'Falha ao gerar pacote isolado de teste' }
+        $updateCheck = Start-Process -FilePath (Join-Path $publishRoot 'VaultSync.exe') -ArgumentList @('--test-updates', ('"' + (Join-Path $fixtureRoot 'VaultSync.exe') + '"'), ('"' + (Join-Path $buildRoot 'update-runtime-results.json') + '"')) -WindowStyle Hidden -Wait -PassThru
+        if ($updateCheck.ExitCode -ne 0) { throw 'Falha no teste isolado de atualização e retomada' }
+    }
     $dist = Join-Path $projectRoot 'dist'; New-Item -ItemType Directory -Force -Path $dist | Out-Null
     [xml]$projectInfo = Get-Content -LiteralPath (Join-Path $projectRoot 'src/App/VaultSync.App.csproj') -Raw
     $version = $projectInfo.Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1

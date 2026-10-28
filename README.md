@@ -12,10 +12,12 @@
   &nbsp; · &nbsp;
   <a href="docs/manual.md">Manual completo</a>
   &nbsp; · &nbsp;
-  <a href="docs/release-v1.1.0.md">Novidades da versão 1.1.0</a>
+  <a href="docs/release-v1.2.0.md">Novidades da versão 1.2.0</a>
 </p>
 
 ## Seu vault, sob controle
+
+> **Versão 1.2.0:** atualização assistida pelo aplicativo, com confirmação antes de baixar e preservação do estado da sincronização.
 
 O Vault Sync observa uma pasta local e sua correspondente no iCloud deste PC. Ele copia as alterações nos dois sentidos, mostra pendências e permite revisar conflitos lado a lado.
 
@@ -63,13 +65,25 @@ Detalhes sobre recuperação, arquivos grandes e layouts do Obsidian estão no *
 
 ## Desenvolvimento
 
+### Atualização assistida — versão 1.2
+
+Em **Configurações → Atualizações**, o aplicativo instalado consulta o GitHub ao abrir e a cada seis horas, inclusive na bandeja. Também há **Verificar agora** e uma opção para desligar consultas automáticas. Uma versão nova gera aviso discreto; **Depois** dispensa o aviso daquela versão durante a sessão, e a próxima abertura pode oferecê-la novamente.
+
+O download só começa ao aceitar **Atualizar agora**. O pacote é conferido por tamanho, SHA-256 e versão; a sincronização continua durante o download. Depois, o programa encerra suas operações com segurança, instala e reabre no estado anterior: ativo, pausado ou parado. Configuração, banco, conflitos, backups, tema, idioma e preferência de inicialização são preservados. Se a troca falhar, o auxiliar tenta restaurar a instalação anterior.
+
+A 1.1.0 não tem esse mecanismo: a 1.2 precisará ser instalada manualmente uma vez em cada PC. Avaliações e cópias portáteis usam a página de releases para instalação manual. Somente releases estáveis com instalador x64 e `SHA256SUMS.txt` são consideradas; publicar apenas um commit ou uma prévia não oferece atualização.
+
+Os arquivos temporários ficam em `%LOCALAPPDATA%/VaultSync/updates`, fora dos vaults. A consulta não faz varreduras extras do MegaBrain e não exige GitHub instalado, conta ou token enquanto o repositório for público. O download é do pacote completo. Leia o [funcionamento e os testes do atualizador](docs/atualizacoes.md).
+
+### Compilar e validar
+
 C# · .NET 8 · WPF · SQLite. Sem telemetria do aplicativo; fontes e recursos da interface são locais.
 
 ```powershell
 ./scripts/build.ps1 -Publish
 ```
 
-O script compila, executa os testes do núcleo, o smoke da interface e a verificação isolada do instalador. Builds e fixtures ficam em `%LOCALAPPDATA%/VaultSyncBuild`; o instalador e seu SHA-256 ficam em `dist/`. Use `-SkipUi` em ambientes sem desktop interativo.
+O script compila, executa os testes do núcleo e do cliente de atualização, o smoke da interface e a verificação isolada do instalador. Com `-Publish`, também gera um segundo pacote exclusivamente de teste e exercita atualização/restauração em sandboxes. Builds e fixtures ficam em `%LOCALAPPDATA%/VaultSyncBuild`; somente os entregáveis intencionais e seus checksums ficam em `dist/`. Use `-SkipUi` em ambientes sem desktop interativo; essa opção também dispensa o teste de atualização que reabre janelas WPF.
 
 [Arquitetura](docs/arquitetura.md) · [Operação](docs/operacao.md) · [Identidade visual](docs/identidade-visual.md) · [Avisos de terceiros](THIRD-PARTY-NOTICES.md)
 

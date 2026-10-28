@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using VaultSync.Core;
+using VaultSync.Updates;
 
 namespace VaultSync.App;
 
@@ -35,6 +36,7 @@ internal static class UiSmoke
         var confirmation = new ThemedDialog("Aplicar esta escolha às duas pastas? O conteúdo será revalidado antes da alteração.", true); Capture(confirmation, Path.Combine(output, "confirmation.png")); confirmation.Close();
         ThemeAndScreens(output, comparisonEngine.PrepareComparison(conflict)!);
         LocalizationAndLayout(output, comparisonEngine.PrepareComparison(conflict)!);
+        UpdateScreens(output);
         RunWithDispatcher(Activation(output));
         RunWithDispatcher(Workflow(output));
         if (ConflictWindow.MarkdownPreview("# Teste\n<script>alert(1)</script>\n![imagem](https://invalid.example/a)").Blocks.Count != 3) throw new InvalidOperationException("Preview inesperado.");
@@ -65,6 +67,27 @@ internal static class UiSmoke
             if (sender.ExitCode != 0) throw new InvalidOperationException("Segunda abertura não encontrou a instância existente.");
         }
         string instanceName() => instance.Name;
+    }
+    private static void UpdateScreens(string output)
+    {
+        string dir = Path.Combine(output, "updates"); Directory.CreateDirectory(dir);
+        var release = new UpdateRelease("1.3.0", "# Novidades\n\nAtualização de exemplo.\n<script>não executado</script>\n![imagem](https://invalid.example/not-loaded.png)", GitHubUpdates.ReleasePage + "/tag/v1.3.0",
+            new("VaultSync-Obsidian-1.3.0-win-x64-Setup.exe", "", 164000000, null), new("SHA256SUMS.txt", "", 109, null));
+        foreach (string language in Strings.Codes)
+        foreach (var theme in new[] { ThemeMode.Dark, ThemeMode.Light })
+        {
+            Strings.Set(language, false); Theme.Set(theme, false);
+            var window = new MainWindow(true, Path.Combine(dir, language + theme)); window.Show(); window.SelectTabSmoke(4); window.UpdateAvailableSmoke(release);
+            window.Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.ApplicationIdle); window.UpdateLayout();
+            var heading = Descendants(window).OfType<System.Windows.Controls.TextBlock>().First(t => t.Text == Strings.T("Atualizações"));
+            ((FrameworkElement)heading.Parent).BringIntoView();
+            Capture(window, Path.Combine(dir, $"{language}-{theme}-settings.png"));
+            if (!Descendants(window).OfType<System.Windows.Controls.TextBlock>().Any(t => t.Text == Strings.T("Nova versão disponível: 1.3.0"))) throw new InvalidOperationException("Aviso de atualização não traduzido.");
+            var dialog = new UpdateWindow(release, true); Capture(dialog, Path.Combine(dir, $"{language}-{theme}-offer.png"));
+            if (!Descendants(dialog).OfType<System.Windows.Controls.Button>().Any(b => Equals(b.Content, Strings.T("Atualizar agora")))) throw new InvalidOperationException("Ação de atualização não traduzida.");
+            dialog.Close(); window.CloseSmoke();
+        }
+        Strings.Set("pt-BR", false); Theme.Set(ThemeMode.Dark, false);
     }
     private static void ThemeAndScreens(string output, ComparisonSnapshot snapshot)
     {
